@@ -162,7 +162,7 @@ export default class Three extends Component {
                                 ls = LocalStorage.getInstance();
                                 userData = {
                                     project: item.id,
-                                    user: 1,
+                                    user: ls.getUserId(),
                                     deviceId: ls.getPlayerId()
                                 }
                                 api.callApi("addFollower","POST", userData ,response => {

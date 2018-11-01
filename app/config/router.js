@@ -236,7 +236,7 @@ export const UpdatesStack = StackNavigator(
 export const MyTab = TabNavigator(
   {
     OneStack: {
-      screen: OneStack,
+      screen: OneStack, //LoginStack
       navigationOptions: {
         tabBarLabel: "One",
         tabBarIcon: <Icon size={25} name={"dog"} style={{ color: "grey" }} />
