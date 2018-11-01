@@ -30,6 +30,8 @@ import Login from "../screens/Login";
 import Exchange from "../screens/Exchange";
 import RequestDetail from "../screens/RequestDetail";
 import Profile from "../screens/Profile";
+import Challenge from "../screens/Challenge";
+import ChallengeDetails from "../screens/ChallengeDetails";
 import ProjectDetail from "../screens/ProjectDetail/ProjectDetail";
 import Detail from "../screens/ProjectDetail/Detail";
 import Updates from "../screens/ProjectDetail/Updates";
@@ -86,7 +88,7 @@ export const OneStack = StackNavigator(
     One: {
       screen: One,
       navigationOptions: {
-        title: "One"
+        title: "Discover"
       }
     }
   },
@@ -151,6 +153,27 @@ export const ExchangeStack = StackNavigator(
   {
     headerMode: "none"
   }
+);
+
+export const ChallengeStack = StackNavigator(
+    {
+        Challenge: {
+            screen: Challenge,
+            navigationOptions: {
+                title: "Challenge"
+            }
+        },
+
+        ChallengeDetails: {
+            screen: ChallengeDetails,
+            navigationOptions: {
+                title: "Challenge"
+            }
+        }
+    },
+    {
+      headerMode: "none"
+    }
 );
 
 export const ProfileStack = StackNavigator(
@@ -234,11 +257,16 @@ export const MyTab = TabNavigator(
       }
     },
     ExchangeStack: {
-      screen: ExchangeStack,
-      navigationOptions: {
-        tabBarLabel: "Marktplaats",
-        tabBarIcon: <Icon size={25} name={"pig"} style={{ color: "grey" }} />
-      }
+        screen: ExchangeStack,
+        navigationOptions: {
+            tabBarLabel: "Marktplaats",
+            tabBarIcon: <Icon size={25} name={"pig"} style={{ color: "grey" }} />
+        }
+    },
+    ChallengeStack: {
+        screen: ChallengeStack,
+        navigationOptions: "Challenge",
+        tabBarIcon: <Icon size={25} name={"horseshoe"} style={{ color: "grey" }} />
     }
   },
   {

@@ -17,7 +17,7 @@ export default class One extends Component {
       <View style={{ width: "100%", height: "100%" }}>
         <Toolbar
           leftElement="menu"
-          centerElement="One"
+          centerElement="Discover"
           onLeftElementPress={() => this.props.navigation.toggleDrawer()}
         />
         <View style={styles.container}>
