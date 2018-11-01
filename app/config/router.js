@@ -6,7 +6,7 @@ import {
   Header,
   DrawerItems
 } from "react-navigation";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { NavigationComponent } from "react-native-material-bottom-navigation-performance";
 import { Drawer, Avatar } from "react-native-material-ui";
@@ -21,6 +21,7 @@ import {
   Easing,
   Text
 } from "react-native";
+import { FluidNavigator, Transition } from "react-navigation-fluid-transitions";
 
 import One from "../screens/One";
 import Two from "../screens/Two";
@@ -111,14 +112,37 @@ export const TwoStack = StackNavigator(
   }
 );
 
-export const ProjectsStack = StackNavigator({
-  Projects: {
-    screen: Projects,
-    navigationOptions: {
-      title: "Projects"
+export const ProjectsStack = FluidNavigator(
+  {
+    Projects: {
+      screen: Projects,
+      navigationOptions: {
+        title: "Projects"
+      }
+    },
+    ProjectDetail: {
+      screen: ProjectDetail,
+      navigationOptions: {
+        title: "Project detail"
+      }
+    },
+    Detail: {
+      screen: Detail,
+      navigationOptions: {
+        title: "Detail"
+      }
+    },
+    Updates: {
+      screen: Updates,
+      navigationOptions: {
+        title: "Updates"
+      }
     }
+  },
+  {
+    headerMode: "none"
   }
-});
+);
 
 export const LoginStack = StackNavigator(
   {
@@ -156,24 +180,24 @@ export const ExchangeStack = StackNavigator(
 );
 
 export const ChallengeStack = StackNavigator(
-    {
-        Challenge: {
-            screen: Challenge,
-            navigationOptions: {
-                title: "Challenge"
-            }
-        },
-
-        ChallengeDetails: {
-            screen: ChallengeDetails,
-            navigationOptions: {
-                title: "Challenge"
-            }
-        }
+  {
+    Challenge: {
+      screen: Challenge,
+      navigationOptions: {
+        title: "Challenge"
+      }
     },
-    {
-      headerMode: "none"
+
+    ChallengeDetails: {
+      screen: ChallengeDetails,
+      navigationOptions: {
+        title: "Challenge"
+      }
     }
+  },
+  {
+    headerMode: "none"
+  }
 );
 
 export const ProfileStack = StackNavigator(
@@ -238,35 +262,43 @@ export const MyTab = TabNavigator(
     OneStack: {
       screen: OneStack, //LoginStack
       navigationOptions: {
-        tabBarLabel: "One",
-        tabBarIcon: <Icon size={25} name={"dog"} style={{ color: "grey" }} />
+        tabBarLabel: "Discover",
+        tabBarIcon: (
+          <Icon size={25} name={"favorite-border"} style={{ color: "grey" }} />
+        )
       }
     },
     ProfileStack: {
       screen: ProfileStack,
       navigationOptions: {
         tabBarLabel: "Profile",
-        tabBarIcon: <Icon size={25} name={"cat"} style={{ color: "grey" }} />
+        tabBarIcon: <Icon size={25} name={"people"} style={{ color: "grey" }} />
       }
     },
     ProjectsStack: {
       screen: ProjectsStack,
       navigationOptions: {
         tabBarLabel: "Projects",
-        tabBarIcon: <Icon size={25} name={"cow"} style={{ color: "grey" }} />
+        tabBarIcon: (
+          <Icon size={25} name={"explore"} style={{ color: "grey" }} />
+        )
       }
     },
     ExchangeStack: {
-        screen: ExchangeStack,
-        navigationOptions: {
-            tabBarLabel: "Marktplaats",
-            tabBarIcon: <Icon size={25} name={"pig"} style={{ color: "grey" }} />
-        }
+      screen: ExchangeStack,
+      navigationOptions: {
+        tabBarLabel: "Marktplaats",
+        tabBarIcon: (
+          <Icon size={25} name={"compare-arrows"} style={{ color: "grey" }} />
+        )
+      }
     },
     ChallengeStack: {
-        screen: ChallengeStack,
-        navigationOptions: "Challenge",
-        tabBarIcon: <Icon size={25} name={"horseshoe"} style={{ color: "grey" }} />
+      screen: ChallengeStack,
+      navigationOptions: "Challenge",
+      tabBarIcon: (
+        <Icon size={25} name={"horseshoe"} style={{ color: "grey" }} />
+      )
     }
   },
   {
@@ -291,17 +323,30 @@ export const MyTab = TabNavigator(
         tabs: {
           OneStack: {
             activeIcon: (
-              <Icon size={25} name={"dog"} style={{ color: "#2196f3" }} />
+              <Icon
+                size={25}
+                name={"favorite-border"}
+                style={{ color: "#2196f3" }}
+              />
             )
           },
           ProfileStack: {
             activeIcon: (
-              <Icon size={25} name={"cat"} style={{ color: "#2196f3" }} />
+              <Icon size={25} name={"people"} style={{ color: "#2196f3" }} />
             )
           },
-          ThreeStack: {
+          ProjectsStack: {
             activeIcon: (
-              <Icon size={25} name={"cow"} style={{ color: "#2196f3" }} />
+              <Icon size={25} name={"explore"} style={{ color: "#2196f3" }} />
+            )
+          },
+          ExchangeStack: {
+            activeIcon: (
+              <Icon
+                size={25}
+                name={"compare-arrows"}
+                style={{ color: "#2196f3" }}
+              />
             )
           }
         }

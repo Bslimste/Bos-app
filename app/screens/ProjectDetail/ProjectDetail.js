@@ -5,6 +5,7 @@ import { Toolbar } from "react-native-material-ui";
 import Detail from "./Detail.js";
 import Updates from "./Updates.js";
 import { DetailTab } from "../../config/router.js";
+import { FluidNavigator, Transition } from "react-navigation-fluid-transitions";
 
 export default class ProjectDetail extends Component {
   constructor() {
@@ -13,6 +14,12 @@ export default class ProjectDetail extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    const title = navigation.getParam("title", "");
+    const thumbnail = navigation.getParam("thumbnail", "");
+    const likes = navigation.getParam("likes", "");
+    const desc = navigation.getParam("desc", "");
+
     return (
       <View style={{ width: "100%", height: "100%" }}>
         <Toolbar
@@ -23,45 +30,45 @@ export default class ProjectDetail extends Component {
         />
         <View style={styles.container}>
           <View style={{ marginTop: 99 }}>
-            <Carousel
-              width={375}
-              height={200}
-              delay={3000}
-              indicatorAtBottom={true}
-              indicatorSize={20}
-              indicatorColor="black"
-            >
-              <View style={styles.contentContainer}>
-                <Image
-                  source={{
-                    uri:
-                      "https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2016/theroleofbod.jpg"
-                  }}
-                  resizeMode="cover"
-                  style={{ width: "100%", height: 200 }}
-                />
-              </View>
-              <View style={styles.contentContainer}>
-                <Image
-                  source={{
-                    uri:
-                      "http://i.telegraph.co.uk/multimedia/archive/01604/scienceClass_1604229c.jpg"
-                  }}
-                  resizeMode="cover"
-                  style={{ width: "100%", height: 200 }}
-                />
-              </View>
-              <View style={styles.contentContainer}>
-                <Image
-                  source={{
-                    uri:
-                      "http://www.gettingsmart.com/wp-content/uploads/2012/11/Classroom.jpg"
-                  }}
-                  resizeMode="cover"
-                  style={{ width: "100%", height: 200 }}
-                />
-              </View>
-            </Carousel>
+            <Transition shared={title}>
+              <Carousel
+                width={375}
+                height={200}
+                delay={3000}
+                indicatorAtBottom={true}
+                indicatorSize={20}
+                indicatorColor="black"
+              >
+                <View style={styles.contentContainer}>
+                  <Image
+                    source={{
+                      uri: thumbnail
+                    }}
+                    resizeMode="cover"
+                    style={{ width: "100%", height: 200 }}
+                  />
+                </View>
+                <View style={styles.contentContainer}>
+                  <Image
+                    source={{
+                      uri: thumbnail
+                    }}
+                    resizeMode="cover"
+                    style={{ width: "100%", height: 200 }}
+                  />
+                </View>
+                <View style={styles.contentContainer}>
+                  <Image
+                    source={{
+                      uri: thumbnail
+                    }}
+                    resizeMode="cover"
+                    style={{ width: "100%", height: 200 }}
+                  />
+                </View>
+              </Carousel>
+            </Transition>
+
             <View style={{ width: window.innerWidth, height: "100%" }}>
               <DetailTab />
             </View>

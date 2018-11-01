@@ -8,6 +8,7 @@ import {
   SystemMessage
 } from "react-native-gifted-chat";
 import Chatkit from "@pusher/chatkit";
+import { NavigationActions } from "react-navigation";
 
 let avatar =
   "https://cdn1.thr.com/sites/default/files/2017/08/gettyimages-630421358_-_h_2017.jpg";
@@ -239,9 +240,11 @@ export default class Two extends Component {
     return (
       <View style={{ width: "100%", height: "100%" }}>
         <Toolbar
-          leftElement="menu"
+          leftElement="arrow-back"
           centerElement="Conversation"
-          onLeftElementPress={() => this.props.navigation.toggleDrawer()}
+          onLeftElementPress={() =>
+            this.props.navigation.dispatch(NavigationActions.back())
+          }
         />
         <GiftedChat
           onPressAvatar={() => this.props.navigation.navigate("Profile")}

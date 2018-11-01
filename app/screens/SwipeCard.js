@@ -57,8 +57,8 @@ class Card extends React.Component {
       outputRange: [400, 50]
     });
     const height = this.animatedValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [600, 50]
+      inputRange: [0, 0.5, 1],
+      outputRange: [600, 400, 200]
     });
 
     const top = this.animatedValue.interpolate({
@@ -76,32 +76,47 @@ class Card extends React.Component {
     });
 
     const opacity = this.animatedValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, 1]
+      inputRange: [0, 0.9, 1],
+      outputRange: [0, 0, 1]
     });
 
     const opacityRev = this.animatedValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [1, 0]
+      inputRange: [0, 0.9, 1],
+      outputRange: [1, 1, 0]
     });
     return (
       <View style={styles.card}>
         <Animated.Image
           style={{
-            width: width,
             height: height,
+            width: "100%",
             resizeMode: "cover",
             justifyContent: "center",
             position: "absolute",
-            top: top,
-            left: left,
-            borderRadius: borderRadius
+            zIndex: 2
           }}
           source={{ uri: this.props.thumbnail }}
         />
-        <View
-          style={{ height: "100%", width: "100%", justifyContent: "center" }}
+        <Animated.View
+          style={{
+            opacity: opacity,
+            top: 10,
+            left: 10,
+            position: "absolute",
+            zIndex: 3
+          }}
         >
+          <TouchableOpacity onPress={() => this.animateRev()}>
+            <Icon
+              name="close"
+              color="white"
+              size={30}
+              style={{}}
+              onPress={() => this.animateRev()}
+            />
+          </TouchableOpacity>
+        </Animated.View>
+        <View style={{ height: "100%", width: "100%" }}>
           <View
             style={{
               flexDirection: "row",
@@ -112,22 +127,26 @@ class Card extends React.Component {
               style={{
                 flexDirection: "column",
                 padding: 15,
-                opacity: opacity
+                marginTop: 200,
+
+                opacity: opacity,
+                zIndex: 1
               }}
             >
               <Text
                 style={{
-                  marginLeft: 60,
+                  marginLeft: 10,
                   marginRight: 10,
-                  fontSize: 22,
+                  fontSize: 24,
                   fontWeight: "bold"
                 }}
+                numberOfLines={1}
               >
                 {this.props.title}
               </Text>
               <Text
                 style={{
-                  marginLeft: 60,
+                  marginLeft: 10,
                   marginRight: 10,
                   marginBottom: 10,
                   fontSize: 16,
@@ -138,25 +157,29 @@ class Card extends React.Component {
               </Text>
               <Text
                 style={{
-                  margin: 5
+                  margin: 10
                 }}
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-                sed arcu porta, imperdiet ante sed, pretium orci. Nulla
-                facilisi. Suspendisse dapibus ipsum at ipsum euismod vehicula.
-                Morbi malesuada nisl vitae ex elementum sollicitudin. Cras
-                laoreet velit sit amet libero iaculis pellentesque. Donec ac
-                nisl porttitor, sagittis diam non, fringilla velit.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                eleifend mauris ut sapien convallis, et aliquet libero gravida.
+                Maecenas varius feugiat purus vitae porta. Vestibulum malesuada
+                ultricies enim, vel elementum quam dictum ut. Nunc nec nisi
+                pretium, cursus sem a, hendrerit ipsum. Curabitur dapibus lectus
+                ut magna lacinia elementum. Fusce tempor, mi in sodales
+                fermentum, sapien lacus iaculis turpis, in aliquet nisl ex vel
+                lacus. Pellentesque habitant morbi tristique senectus et netus
+                et malesuada fames ac turpis egestas.
               </Text>
             </Animated.View>
           </View>
-          <Animated.View style={{ opacity: opacityRev }}>
+          {!this.state.detail && (
             <LinearGradient
               colors={["#00000000", "#000000cc"]}
               style={{
                 width: "100%",
                 height: "15%",
-                justifyContent: "flex-end"
+                justifyContent: "flex-end",
+                zIndex: 2
               }}
             >
               <View
@@ -196,17 +219,11 @@ class Card extends React.Component {
                   name="information"
                   color="white"
                   size={30}
-                  onPress={() => {
-                    if (this.state.detail) {
-                      this.animateRev();
-                    } else {
-                      this.animate();
-                    }
-                  }}
+                  onPress={() => this.animate()}
                 />
               </View>
             </LinearGradient>
-          </Animated.View>
+          )}
         </View>
       </View>
     );
@@ -412,7 +429,7 @@ export default class App extends React.Component {
             }}
           >
             <Icon
-              name="thumb-down-outline"
+              name="close"
               color="white"
               size={30}
               style={{ padding: 15 }}
@@ -444,7 +461,7 @@ export default class App extends React.Component {
             }}
           >
             <Icon
-              name="thumb-up-outline"
+              name="heart-outline"
               color="white"
               size={30}
               style={{ padding: 15 }}
