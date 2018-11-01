@@ -20,9 +20,10 @@ import {
   View
 } from "react-native";
 import Api from "../config/api.js";
-import LocalStorage from "../config/localStorage.js"
+import LocalStorage from "../config/localStorage.js";
 import { Toolbar } from "react-native-material-ui";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { FluidNavigator, Transition } from "react-navigation-fluid-transitions";
 
 export default class Three extends Component {
   constructor() {
@@ -37,20 +38,13 @@ export default class Three extends Component {
     };
 
     let api = Api.getInstance();
-    api.callApi(
-      "getAllProjects",
-      "POST",
-      {
-        
-      },
-      response => {
-        console.log(response["response"]);
-        this.setState({
-          data: response["response"],
-          loading: false
-        });
-      }
-    );
+    api.callApi("getAllProjects", "POST", {}, response => {
+      console.log(response["response"]);
+      this.setState({
+        data: response["response"],
+        loading: false
+      });
+    });
   }
 
   render() {
@@ -61,18 +55,7 @@ export default class Three extends Component {
         <Toolbar
           leftElement="menu"
           onLeftElementPress={() => this.props.navigation.toggleDrawer()}
-          centerElement={
-            <Text
-              style={{
-                marginLeft: 75,
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 20
-              }}
-            >
-              Projecten
-            </Text>
-          }
+          centerElement="Projects"
         />
         <View>
           <FlatList
@@ -93,13 +76,25 @@ export default class Three extends Component {
             renderItem={({ item }) => (
               <View style={styles.container}>
                 <View style={styles.card} elevation={5}>
-                  <TouchableHighlight onPress={() => {}}>
+                  <TouchableHighlight
+                    onPress={() =>
+                      this.props.navigation.navigate("ProjectDetail", {
+                        title: item.title,
+                        thumbnail: item.thumbnail,
+                        likes: item.likes,
+                        desc: item.desc
+                      })
+                    }
+                  >
                     <View>
-                      <Image
-                        source={{ uri: item.thumbnail }}
-                        resizeMode="cover"
-                        style={{ width: "100%", height: 150 }}
-                      />
+                      <Transition shared={item.title}>
+                        <Image
+                          source={{ uri: item.thumbnail }}
+                          resizeMode="cover"
+                          style={{ width: "100%", height: 150 }}
+                        />
+                      </Transition>
+
                       <View
                         style={{
                           flexDirection: "column",

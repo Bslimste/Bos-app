@@ -25,6 +25,7 @@
     "react-native-tab-view": "^1.2.0",
     "react-native-vector-icons": "^6.0.2",
     "react-navigation": "^2.18.2",
+    "react-navigation-fluid-transitions": "^0.2.72",
     "react-navigation-material-bottom-tabs": "^0.4.0",
     "react-viro": "2.11.0"
   },
