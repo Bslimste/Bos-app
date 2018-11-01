@@ -93,7 +93,16 @@ export default class Three extends Component {
             renderItem={({ item }) => (
               <View style={styles.container}>
                 <View style={styles.card} elevation={5}>
-                  <TouchableHighlight onPress={() => {}}>
+                  <TouchableHighlight
+                    onPress={() =>
+                      this.props.navigation.navigate("ProjectDetail", {
+                        title: item.title,
+                        thumbnail: item.thumbnail,
+                        likes: item.likes,
+                        desc: item.desc
+                      })
+                    }
+                  >
                     <View>
                       <Image
                         source={{ uri: item.thumbnail }}

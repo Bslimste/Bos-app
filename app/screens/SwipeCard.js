@@ -8,7 +8,8 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
-  Animated
+  Animated,
+  Easing
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -19,10 +20,15 @@ import SwipeCards from "../config/SwipeCardModule.js";
 class Card extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { detail: false };
+
     this.animatedValue = new Animated.Value(0);
   }
 
   animate() {
+    this.setState({
+      detail: !this.state.detail
+    });
     this.animatedValue.setValue(0);
     Animated.timing(this.animatedValue, {
       toValue: 1,
@@ -32,77 +38,175 @@ class Card extends React.Component {
     }).start();
   }
 
+  animateRev() {
+    this.setState({
+      detail: !this.state.detail
+    });
+    this.animatedValue.setValue(1);
+    Animated.timing(this.animatedValue, {
+      toValue: 0,
+      duration: 500,
+      easing: Easing.ease,
+      extrapolate: "clamp"
+    }).start();
+  }
+
   render() {
     const width = this.animatedValue.interpolate({
       inputRange: [0, 1],
-      outputRange: ["100%", "10%"]
+      outputRange: [400, 50]
     });
     const height = this.animatedValue.interpolate({
       inputRange: [0, 1],
-      outputRange: ["100%", "10%"]
+      outputRange: [600, 50]
+    });
+
+    const top = this.animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 15]
+    });
+    const left = this.animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 15]
+    });
+
+    const borderRadius = this.animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 50]
+    });
+
+    const opacity = this.animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [0, 1]
+    });
+
+    const opacityRev = this.animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 0]
     });
     return (
       <View style={styles.card}>
+        <Animated.Image
+          style={{
+            width: width,
+            height: height,
+            resizeMode: "cover",
+            justifyContent: "center",
+            position: "absolute",
+            top: top,
+            left: left,
+            borderRadius: borderRadius
+          }}
+          source={{ uri: this.props.thumbnail }}
+        />
         <View
-          style={{ height: "100%", width: "100%", justifyContent: "flex-end" }}
+          style={{ height: "100%", width: "100%", justifyContent: "center" }}
         >
-          <Image
+          <View
             style={{
-              width: width,
-              height: height,
-              resizeMode: "cover",
-              justifyContent: "flex-end",
-              position: "absolute",
-              top: 0,
-              left: 0
+              flexDirection: "row",
+              height: 450
             }}
-            source={{ uri: this.props.thumbnail }}
-          />
-          <LinearGradient
-            colors={["#00000000", "#000000cc"]}
-            style={{ width: "100%", height: "15%", justifyContent: "flex-end" }}
           >
-            <View
+            <Animated.View
               style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center"
+                flexDirection: "column",
+                padding: 15,
+                opacity: opacity
               }}
             >
-              <View style={{ flexDirection: "column", width: "85%" }}>
-                <Text
-                  style={{
-                    marginLeft: 10,
-                    marginRight: 10,
-                    fontSize: 24,
-                    fontWeight: "bold",
-                    color: "white"
+              <Text
+                style={{
+                  marginLeft: 60,
+                  marginRight: 10,
+                  fontSize: 22,
+                  fontWeight: "bold"
+                }}
+              >
+                {this.props.title}
+              </Text>
+              <Text
+                style={{
+                  marginLeft: 60,
+                  marginRight: 10,
+                  marginBottom: 10,
+                  fontSize: 16,
+                  fontWeight: "bold"
+                }}
+              >
+                By Davey Schippers
+              </Text>
+              <Text
+                style={{
+                  margin: 5
+                }}
+              >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                sed arcu porta, imperdiet ante sed, pretium orci. Nulla
+                facilisi. Suspendisse dapibus ipsum at ipsum euismod vehicula.
+                Morbi malesuada nisl vitae ex elementum sollicitudin. Cras
+                laoreet velit sit amet libero iaculis pellentesque. Donec ac
+                nisl porttitor, sagittis diam non, fringilla velit.
+              </Text>
+            </Animated.View>
+          </View>
+          <Animated.View style={{ opacity: opacityRev }}>
+            <LinearGradient
+              colors={["#00000000", "#000000cc"]}
+              style={{
+                width: "100%",
+                height: "15%",
+                justifyContent: "flex-end"
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <View style={{ flexDirection: "column", width: "85%" }}>
+                  <Text
+                    style={{
+                      marginLeft: 10,
+                      marginRight: 10,
+                      fontSize: 24,
+                      fontWeight: "bold",
+                      color: "white"
+                    }}
+                    numberOfLines={1}
+                  >
+                    {this.props.title}
+                  </Text>
+                  <Text
+                    style={{
+                      marginLeft: 10,
+                      marginRight: 10,
+                      marginBottom: 10,
+                      fontSize: 16,
+                      fontWeight: "bold",
+                      color: "white"
+                    }}
+                  >
+                    By Davey Schippers
+                  </Text>
+                </View>
+                <Icon
+                  name="information"
+                  color="white"
+                  size={30}
+                  onPress={() => {
+                    if (this.state.detail) {
+                      this.animateRev();
+                    } else {
+                      this.animate();
+                    }
                   }}
-                  numberOfLines={1}
-                >
-                  {this.props.title}
-                </Text>
-                <Text
-                  style={{
-                    marginLeft: 10,
-                    marginRight: 10,
-                    marginBottom: 10,
-                    fontSize: 16,
-                    fontWeight: "bold",
-                    color: "white"
-                  }}
-                >
-                  By Davey Schippers
-                </Text>
+                />
               </View>
-              <Icon
-                name="information"
-                color="white"
-                size={30}
-                onPress={() => this.animate()}
-              />
-            </View>
-          </LinearGradient>
+            </LinearGradient>
+          </Animated.View>
         </View>
       </View>
     );

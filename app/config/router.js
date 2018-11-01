@@ -109,15 +109,6 @@ export const TwoStack = StackNavigator(
   }
 );
 
-export const ProjectsStack = StackNavigator({
-  Projects: {
-    screen: Projects,
-    navigationOptions: {
-      title: "Projects"
-    }
-  }
-});
-
 export const LoginStack = StackNavigator(
   {
     Login: {
@@ -166,6 +157,33 @@ export const ProfileStack = StackNavigator(
     headerMode: "none"
   }
 );
+
+export const ProjectsStack = StackNavigator({
+  Projects: {
+    screen: Projects,
+    navigationOptions: {
+      title: "Projects"
+    }
+  },
+  ProjectDetail: {
+    screen: ProjectDetail,
+    navigationOptions: {
+      title: "Project detail"
+    }
+  },
+  Detail: {
+    screen: Detail,
+    navigationOptions: {
+      title: "Detail"
+    }
+  },
+  Updates: {
+    screen: Updates,
+    navigationOptions: {
+      title: "Updates"
+    }
+  }
+});
 
 export const ProjectDetailStack = StackNavigator(
   {

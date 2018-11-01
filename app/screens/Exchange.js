@@ -18,30 +18,22 @@ import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 export default class Exchange extends Component {
   constructor() {
     super();
-    this.state = {
-      index: 0,
-      routes: [
-        { key: "asked", title: "Asked" },
-        { key: "offered", title: "Offered" }
-      ]
-    };
+    this.state = { dataArray: [] };
     ls = LocalStorage.getInstance();
     api = Api.getInstance();
     api.callApi("getAllNecessityRequests", "POST", {}, response => {
-      completeArray = response["response"];
-      offeredArray = [];
-      askedArray = [];
-      for (let index in completeArray) {
-        entry = completeArray[index];
-        if (entry.offered) {
-          offeredArray.push(entry);
-        } else {
-          askedArray.push(entry);
-        }
-      }
+      console.log(response["response"]);
       this.setState({
-        dataArrayOffered: offeredArray,
-        dataArrayAsked: askedArray
+        dataArray: response["response"]
+      });
+    });
+  }
+
+  componentWillMount() {
+    api = Api.getInstance();
+    api.callApi("getAllNecessityRequests", "POST", {}, response => {
+      this.setState({
+        dataArray: response["response"]
       });
     });
   }
@@ -192,14 +184,7 @@ export default class Exchange extends Component {
           centerElement="Exchange"
           onLeftElementPress={() => this.props.navigation.toggleDrawer()}
         />
-        <TabView
-          navigationState={this.state}
-          renderScene={SceneMap({
-            asked: AskedRoute,
-            offered: OfferedRoute
-          })}
-          onIndexChange={index => this.setState({ index })}
-        />
+        <View style={styles.container} />
       </View>
     );
   }
