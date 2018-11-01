@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableHighlight, Dimensions, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableHighlight,
+  Dimensions,
+  Image
+} from "react-native";
 import { Toolbar } from "react-native-material-ui";
 import LocalStorage from "../config/localStorage.js";
 import Api from "../config/api.js";
@@ -201,6 +209,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: 70,
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: "row"
   }
 });

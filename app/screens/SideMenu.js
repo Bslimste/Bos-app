@@ -60,7 +60,8 @@ class SideMenu extends Component {
                 value: "Instellingen",
               },
               { icon: "close",
-                value: "Logout" }
+                value: "Logout" 
+                }
             ]}
           />
         </Drawer>
