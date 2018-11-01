@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { NavigationActions } from "react-navigation";
 import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
 import PropTypes from "prop-types";
+import LocalStorage from "../config/localStorage.js"
 
 import {
   COLOR,
@@ -23,6 +24,13 @@ class SideMenu extends Component {
   };
 
   render() {
+    const ls = LocalStorage.getInstance()
+    let boolean = false
+    console.log(ls.getUserId())
+    if(ls.getUserId() != '') {
+        boolean = true
+    }
+    const loggedIn = boolean
     return (
       <View style={{ flex: 1, paddingTop: 30, backgroundColor: "#7ccad8" }}>
         <Drawer>

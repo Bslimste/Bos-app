@@ -22,7 +22,6 @@ export default class Exchange extends Component {
                 minutes = "0" + minutes
             }
             entry['deadLineDate'] = hours + ':' + minutes + " " + date.getDate() + '-' + date.getMonth() + '-' + date.getFullYear()
-            console.log(entry);
         }
         this.setState({"dataArray": array})
     });
