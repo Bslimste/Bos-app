@@ -6,7 +6,7 @@ import {
   Header,
   DrawerItems
 } from "react-navigation";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { NavigationComponent } from "react-native-material-bottom-navigation-performance";
 import { Drawer, Avatar } from "react-native-material-ui";
@@ -116,6 +116,24 @@ export const ProjectsStack = StackNavigator(
       navigationOptions: {
         title: "Projects"
       }
+    },
+    ProjectDetail: {
+      screen: ProjectDetail,
+      navigationOptions: {
+        title: "Project detail"
+      }
+    },
+    Detail: {
+      screen: Detail,
+      navigationOptions: {
+        title: "Detail"
+      }
+    },
+    Updates: {
+      screen: Updates,
+      navigationOptions: {
+        title: "Updates"
+      }
     }
   },
   {
@@ -220,29 +238,35 @@ export const MyTab = TabNavigator(
     OneStack: {
       screen: OneStack,
       navigationOptions: {
-        tabBarLabel: "One",
-        tabBarIcon: <Icon size={25} name={"dog"} style={{ color: "grey" }} />
+        tabBarLabel: "Discover",
+        tabBarIcon: (
+          <Icon size={25} name={"favorite-border"} style={{ color: "grey" }} />
+        )
       }
     },
     ProfileStack: {
       screen: ProfileStack,
       navigationOptions: {
         tabBarLabel: "Profile",
-        tabBarIcon: <Icon size={25} name={"cat"} style={{ color: "grey" }} />
+        tabBarIcon: <Icon size={25} name={"people"} style={{ color: "grey" }} />
       }
     },
     ProjectsStack: {
       screen: ProjectsStack,
       navigationOptions: {
         tabBarLabel: "Projects",
-        tabBarIcon: <Icon size={25} name={"cow"} style={{ color: "grey" }} />
+        tabBarIcon: (
+          <Icon size={25} name={"explore"} style={{ color: "grey" }} />
+        )
       }
     },
     ExchangeStack: {
       screen: ExchangeStack,
       navigationOptions: {
-        tabBarLabel: "Marktplaats",
-        tabBarIcon: <Icon size={25} name={"pig"} style={{ color: "grey" }} />
+        tabBarLabel: "Markt",
+        tabBarIcon: (
+          <Icon size={25} name={"compare-arrows"} style={{ color: "grey" }} />
+        )
       }
     }
   },
@@ -268,17 +292,30 @@ export const MyTab = TabNavigator(
         tabs: {
           OneStack: {
             activeIcon: (
-              <Icon size={25} name={"dog"} style={{ color: "#2196f3" }} />
+              <Icon
+                size={25}
+                name={"favorite-border"}
+                style={{ color: "#2196f3" }}
+              />
             )
           },
           ProfileStack: {
             activeIcon: (
-              <Icon size={25} name={"cat"} style={{ color: "#2196f3" }} />
+              <Icon size={25} name={"people"} style={{ color: "#2196f3" }} />
             )
           },
-          ThreeStack: {
+          ProjectsStack: {
             activeIcon: (
-              <Icon size={25} name={"cow"} style={{ color: "#2196f3" }} />
+              <Icon size={25} name={"explore"} style={{ color: "#2196f3" }} />
+            )
+          },
+          ExchangeStack: {
+            activeIcon: (
+              <Icon
+                size={25}
+                name={"compare-arrows"}
+                style={{ color: "#2196f3" }}
+              />
             )
           }
         }

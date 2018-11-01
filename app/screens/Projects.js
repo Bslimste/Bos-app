@@ -61,18 +61,7 @@ export default class Three extends Component {
         <Toolbar
           leftElement="menu"
           onLeftElementPress={() => this.props.navigation.toggleDrawer()}
-          centerElement={
-            <Text
-              style={{
-                marginLeft: 75,
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 20
-              }}
-            >
-              Projecten
-            </Text>
-          }
+          centerElement="Projects"
         />
         <View>
           <FlatList
@@ -93,7 +82,16 @@ export default class Three extends Component {
             renderItem={({ item }) => (
               <View style={styles.container}>
                 <View style={styles.card} elevation={5}>
-                  <TouchableHighlight onPress={() => {}}>
+                  <TouchableHighlight
+                    onPress={() =>
+                      this.props.navigation.navigate("ProjectDetail", {
+                        title: item.title,
+                        thumbnail: item.thumbnail,
+                        likes: item.likes,
+                        desc: item.desc
+                      })
+                    }
+                  >
                     <View>
                       <Image
                         source={{ uri: item.thumbnail }}

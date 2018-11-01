@@ -13,6 +13,12 @@ export default class ProjectDetail extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
+    const title = navigation.getParam("title", "");
+    const thumbnail = navigation.getParam("thumbnail", "");
+    const likes = navigation.getParam("likes", "");
+    const desc = navigation.getParam("desc", "");
+
     return (
       <View style={{ width: "100%", height: "100%" }}>
         <Toolbar
@@ -34,8 +40,7 @@ export default class ProjectDetail extends Component {
               <View style={styles.contentContainer}>
                 <Image
                   source={{
-                    uri:
-                      "https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/hires/2016/theroleofbod.jpg"
+                    uri: thumbnail
                   }}
                   resizeMode="cover"
                   style={{ width: "100%", height: 200 }}
@@ -44,8 +49,7 @@ export default class ProjectDetail extends Component {
               <View style={styles.contentContainer}>
                 <Image
                   source={{
-                    uri:
-                      "http://i.telegraph.co.uk/multimedia/archive/01604/scienceClass_1604229c.jpg"
+                    uri: thumbnail
                   }}
                   resizeMode="cover"
                   style={{ width: "100%", height: 200 }}
@@ -54,8 +58,7 @@ export default class ProjectDetail extends Component {
               <View style={styles.contentContainer}>
                 <Image
                   source={{
-                    uri:
-                      "http://www.gettingsmart.com/wp-content/uploads/2012/11/Classroom.jpg"
+                    uri: thumbnail
                   }}
                   resizeMode="cover"
                   style={{ width: "100%", height: 200 }}
