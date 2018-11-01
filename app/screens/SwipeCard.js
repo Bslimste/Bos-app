@@ -7,7 +7,8 @@ import {
   View,
   Image,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
+  Animated
 } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -18,27 +19,91 @@ import SwipeCards from "../config/SwipeCardModule.js";
 class Card extends React.Component {
   constructor(props) {
     super(props);
+    this.animatedValue = new Animated.Value(0);
+  }
+
+  animate() {
+    this.animatedValue.setValue(0);
+    Animated.timing(this.animatedValue, {
+      toValue: 1,
+      duration: 500,
+      easing: Easing.ease,
+      extrapolate: "clamp"
+    }).start();
   }
 
   render() {
+    const width = this.animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["100%", "10%"]
+    });
+    const height = this.animatedValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: ["100%", "10%"]
+    });
     return (
       <View style={styles.card}>
-        <Image
-          style={styles.thumbnail}
-          source={{ uri: this.props.thumbnail }}
-        />
-        <Text style={styles.text}>{this.props.title}</Text>
-        {
-          //<View style={{ flexDirection: "row" }}>
-          // <Icon
-          //   name="map-marker"
-          //   backgroundColor="#3b5998"
-          //   style={{ padding: 5 }}
-          // />
-          // <Text style={{ paddingTop: 5 }}>{this.props.location}</Text>
-          //</View>
-        }
-        <Text style={{ padding: 10 }}>{this.props.desc}</Text>
+        <View
+          style={{ height: "100%", width: "100%", justifyContent: "flex-end" }}
+        >
+          <Image
+            style={{
+              width: width,
+              height: height,
+              resizeMode: "cover",
+              justifyContent: "flex-end",
+              position: "absolute",
+              top: 0,
+              left: 0
+            }}
+            source={{ uri: this.props.thumbnail }}
+          />
+          <LinearGradient
+            colors={["#00000000", "#000000cc"]}
+            style={{ width: "100%", height: "15%", justifyContent: "flex-end" }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <View style={{ flexDirection: "column", width: "85%" }}>
+                <Text
+                  style={{
+                    marginLeft: 10,
+                    marginRight: 10,
+                    fontSize: 24,
+                    fontWeight: "bold",
+                    color: "white"
+                  }}
+                  numberOfLines={1}
+                >
+                  {this.props.title}
+                </Text>
+                <Text
+                  style={{
+                    marginLeft: 10,
+                    marginRight: 10,
+                    marginBottom: 10,
+                    fontSize: 16,
+                    fontWeight: "bold",
+                    color: "white"
+                  }}
+                >
+                  By Davey Schippers
+                </Text>
+              </View>
+              <Icon
+                name="information"
+                color="white"
+                size={30}
+                onPress={() => this.animate()}
+              />
+            </View>
+          </LinearGradient>
+        </View>
       </View>
     );
   }
@@ -233,7 +298,7 @@ export default class App extends React.Component {
           handleNope={this.handleNope}
           cardRemoved={this.cardRemoved.bind(this)}
         />
-        <View style={{ flexDirection: "row", paddingBottom: 25 }}>
+        <View style={{ flexDirection: "row", paddingBottom: 10 }}>
           <TouchableOpacity
             style={{
               backgroundColor: "#f44336",
@@ -290,19 +355,22 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   card: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     borderRadius: 20,
     overflow: "hidden",
     borderColor: "grey",
     backgroundColor: "white",
     borderWidth: 1,
     elevation: 5,
-    width: 300,
-    height: "95%"
+    width: 360,
+    marginTop: 10,
+    height: "97%"
   },
   thumbnail: {
     width: "100%",
-    height: "50%"
+    height: "100%",
+    resizeMode: "cover",
+    justifyContent: "flex-end"
   },
   text: {
     fontSize: 25,
