@@ -268,13 +268,6 @@ export const MyTab = TabNavigator(
         )
       }
     },
-    ProfileStack: {
-      screen: ProfileStack,
-      navigationOptions: {
-        tabBarLabel: "Profile",
-        tabBarIcon: <Icon size={25} name={"people"} style={{ color: "grey" }} />
-      }
-    },
     ProjectsStack: {
       screen: ProjectsStack,
       navigationOptions: {
@@ -328,11 +321,6 @@ export const MyTab = TabNavigator(
                 name={"favorite-border"}
                 style={{ color: "#2196f3" }}
               />
-            )
-          },
-          ProfileStack: {
-            activeIcon: (
-              <Icon size={25} name={"people"} style={{ color: "#2196f3" }} />
             )
           },
           ProjectsStack: {

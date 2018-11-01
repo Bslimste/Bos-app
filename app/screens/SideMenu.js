@@ -24,13 +24,25 @@ class SideMenu extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, paddingTop: 30, backgroundColor: "#2196f3" }}>
+      <View style={{ flex: 1, paddingTop: 30, backgroundColor: "#7ccad8" }}>
         <Drawer>
           <Drawer.Header>
             <Drawer.Header.Account
-              avatar={<Avatar image={<Image style={{height: 80, width: 80, borderRadius: 180}} source={{ uri: 'http://gromdroid.nl/bslim/wp-content/uploads/2018/10/hoi-34.jpg' }} />} />}
+              avatar={
+                <Avatar
+                  image={
+                    <Image
+                      style={{ height: 80, width: 80, borderRadius: 180 }}
+                      source={{
+                        uri:
+                          "http://gromdroid.nl/bslim/wp-content/uploads/2018/10/hoi-34.jpg"
+                      }}
+                    />
+                  }
+                />
+              }
               style={{
-                container: { backgroundColor: "#2196f3" }
+                container: { backgroundColor: "#7ccad8" }
               }}
               footer={{
                 dense: true,
@@ -43,25 +55,28 @@ class SideMenu extends Component {
           </Drawer.Header>
           <Drawer.Section
             divider
-            items={[{ 
-                icon: "person", 
-                value: "Mijn profiel"
-                },
+            items={[
+              {
+                icon: "person",
+                value: "Mijn profiel",
+                onPress: () => this.props.navigation.navigate("ProfileStack")
+              },
               {
                 icon: "folder",
-                value: "Gevolgde Projecten",
+                value: "Gevolgde Projecten"
               },
               {
                 icon: "email",
-                value: "Feedback",
+                value: "Feedback"
               },
               {
                 icon: "settings",
-                value: "Instellingen",
+                value: "Instellingen"
               },
-              { icon: "close",
-                value: "Logout" 
-                }
+              {
+                icon: "close",
+                value: "Logout"
+              }
             ]}
           />
         </Drawer>
