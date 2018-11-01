@@ -41,7 +41,7 @@ export default class Three extends Component {
       "getAllProjects",
       "POST",
       {
-        hello: "hello"
+        
       },
       response => {
         console.log(response["response"]);
@@ -142,7 +142,7 @@ export default class Three extends Component {
                             color: "#e95827"
                           }}
                         >
-                          By Tommy de Vries
+                          By {item.creatorName}
                         </Text>
                       </View>
                       <TouchableOpacity
