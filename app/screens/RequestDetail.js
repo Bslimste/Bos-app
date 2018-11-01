@@ -19,7 +19,6 @@ export default class RequestDetail extends Component {
     const necessity = navigation.getParam("necessity", "");
     const profilePhoto = navigation.getParam("profilePhoto", "");
     const offered = navigation.getParam("offered", "");
-    console.log(offered);
     const picture = navigation.getParam("picture", "");
     return (
       <View style={{ width: "100%", height: "100%" }}>

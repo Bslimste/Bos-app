@@ -20,6 +20,7 @@ import {
   View
 } from "react-native";
 import Api from "../config/api.js";
+import LocalStorage from "../config/localStorage.js";
 import { Toolbar } from "react-native-material-ui";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { FluidNavigator, Transition } from "react-navigation-fluid-transitions";
@@ -37,7 +38,6 @@ export default class Three extends Component {
     };
 
     let api = Api.getInstance();
-    console.log(" hallo");
     api.callApi("getAllProjects", "POST", {}, response => {
       console.log(response["response"]);
       this.setState({
@@ -150,6 +150,21 @@ export default class Three extends Component {
                           position: "absolute",
                           bottom: 5,
                           right: 5
+                        }}
+                        onPress={() => {
+                          api = Api.getInstance();
+                          ls = LocalStorage.getInstance();
+                          userData = {
+                            project: item.id,
+                            user: 1,
+                            deviceId: ls.getPlayerId()
+                          };
+                          api.callApi(
+                            "addFollower",
+                            "POST",
+                            userData,
+                            response => {}
+                          );
                         }}
                       >
                         <Icon
