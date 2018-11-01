@@ -3,6 +3,7 @@ import React from "react";
 export default class LocalStorage {
   static instance = null;
   playerId = '';
+  userId = '';
 
   static getInstance() {
     if (LocalStorage.instance == null) {
@@ -18,5 +19,13 @@ export default class LocalStorage {
 
   getPlayerId() {
   	return this.playerId;
+  }
+
+  saveUserId(userId) {
+    this.userId = userId;
+  }
+
+  getUserId() {
+    return this.userId;
   }
 }
