@@ -109,14 +109,19 @@ export const TwoStack = StackNavigator(
   }
 );
 
-export const ProjectsStack = StackNavigator({
-  Projects: {
-    screen: Projects,
-    navigationOptions: {
-      title: "Projects"
+export const ProjectsStack = StackNavigator(
+  {
+    Projects: {
+      screen: Projects,
+      navigationOptions: {
+        title: "Projects"
+      }
     }
+  },
+  {
+    headerMode: "none"
   }
-});
+);
 
 export const LoginStack = StackNavigator(
   {
