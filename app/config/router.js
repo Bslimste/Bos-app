@@ -30,6 +30,8 @@ import Login from "../screens/Login";
 import Exchange from "../screens/Exchange";
 import RequestDetail from "../screens/RequestDetail";
 import Profile from "../screens/Profile";
+import Challenge from "../screens/Challenge";
+import ChallengeDetails from "../screens/ChallengeDetails";
 
 /*
 //StackNavigator for login related screens like login, register and password reset.
@@ -83,7 +85,7 @@ export const OneStack = StackNavigator(
     One: {
       screen: One,
       navigationOptions: {
-        title: "One"
+        title: "Discover"
       }
     }
   },
@@ -155,6 +157,27 @@ export const ExchangeStack = StackNavigator(
     }
 );
 
+export const ChallengeStack = StackNavigator(
+    {
+        Challenge: {
+            screen: Challenge,
+            navigationOptions: {
+                title: "Challenge"
+            }
+        },
+
+        ChallengeDetails: {
+            screen: ChallengeDetails,
+            navigationOptions: {
+                title: "Challenge"
+            }
+        }
+    },
+    {
+      headerMode: "none"
+    }
+);
+
 export const ProfileStack = StackNavigator(
   {
     Profile: {
@@ -199,6 +222,11 @@ export const MyTab = TabNavigator(
             tabBarLabel: "Marktplaats",
             tabBarIcon: <Icon size={25} name={"pig"} style={{ color: "grey" }} />
         }
+    },
+    ChallengeStack: {
+        screen: ChallengeStack,
+        navigationOptions: "Challenge",
+        tabBarIcon: <Icon size={25} name={"horseshoe"} style={{ color: "grey" }} />
     }
   },
   {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavigationActions } from "react-navigation";
-import { ScrollView, Text, View, StyleSheet } from "react-native";
+import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
 import PropTypes from "prop-types";
 
 import {
@@ -28,48 +28,39 @@ class SideMenu extends Component {
         <Drawer>
           <Drawer.Header>
             <Drawer.Header.Account
-              avatar={<Avatar text="FL" />}
+              avatar={<Avatar image={<Image style={{height: 80, width: 80, borderRadius: 180}} source={{ uri: 'http://gromdroid.nl/bslim/wp-content/uploads/2018/10/hoi-34.jpg' }} />} />}
               style={{
                 container: { backgroundColor: "#2196f3" }
               }}
               footer={{
                 dense: true,
                 centerElement: {
-                  primaryText: "Firstname Lastname",
-                  secondaryText: "mail@mail.nl"
+                  primaryText: "Jelmer Haarman",
+                  secondaryText: "jelmer.haarman@xs4all.nl"
                 }
               }}
             />
           </Drawer.Header>
           <Drawer.Section
             divider
-            items={[
-              { icon: "bookmark-border", value: "Item 1", active: true },
+            items={[{ 
+                icon: "person", 
+                value: "Mijn profiel"
+                },
               {
-                icon: "today",
-                value: "Chat",
-                onPress: () => this.props.navigation.navigate("TwoStack")
-              },
-              { icon: "assignment", value: "Item 3" }
-            ]}
-          />
-          <Drawer.Section
-            title="Section"
-            items={[
-              {
-                icon: "info",
-                value: "Item 4"
+                icon: "folder",
+                value: "Gevolgde Projecten",
               },
               {
-                icon: "power-settings-new",
-                value: "AR",
-                onPress: () => this.props.navigation.navigate("FourStack")
+                icon: "email",
+                value: "Feedback",
               },
               {
-                icon: "account-circle",
-                value: "Login",
-                onPress: () => this.props.navigation.navigate("Login")
-              }
+                icon: "settings",
+                value: "Instellingen",
+              },
+              { icon: "close",
+                value: "Logout" }
             ]}
           />
         </Drawer>
