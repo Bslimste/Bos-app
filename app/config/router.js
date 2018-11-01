@@ -24,7 +24,7 @@ import {
 
 import One from "../screens/One";
 import Two from "../screens/Two";
-import Three from "../screens/Three";
+import Projects from "../screens/Projects";
 import SideMenu from "../screens/SideMenu";
 import Login from "../screens/Login";
 import Profile from "../screens/Profile";
@@ -104,12 +104,12 @@ export const TwoStack = StackNavigator(
   }
 );
 
-export const ThreeStack = StackNavigator(
+export const ProjectsStack = StackNavigator(
   {
-    Three: {
-      screen: Three,
+    Projects: {
+      screen: Projects,
       navigationOptions: {
-        title: "Three"
+        title: "Projects"
       }
     }
   },
@@ -163,10 +163,10 @@ export const MyTab = TabNavigator(
         tabBarIcon: <Icon size={25} name={"cat"} style={{ color: "grey" }} />
       }
     },
-    ThreeStack: {
-      screen: ThreeStack,
+    ProjectsStack: {
+      screen: ProjectsStack,
       navigationOptions: {
-        tabBarLabel: "Three",
+        tabBarLabel: "Projects",
         tabBarIcon: <Icon size={25} name={"cow"} style={{ color: "grey" }} />
       }
     }

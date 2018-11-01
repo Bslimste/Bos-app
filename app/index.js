@@ -9,6 +9,9 @@ import {
 } from "react-native";
 import { COLOR, ThemeContext, getTheme } from "react-native-material-ui";
 import { Header } from "react-navigation";
+
+import SplashScreen from "react-native-splash-screen";
+
 // you can set your style right here, it'll be propagated to application
 const uiTheme = {
   palette: {
@@ -28,8 +31,10 @@ class App extends Component {
     console.disableYellowBox = true;
   }
 
-  componentDidMount() {}
-
+  componentDidMount() {
+    // do stuff while splash screen is shown
+    // After having done stuff (such as async tasks) hide the splash screen
+  }
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
