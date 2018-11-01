@@ -429,7 +429,7 @@ export default class App extends React.Component {
             }}
           >
             <Icon
-              name="thumb-down-outline"
+              name="close"
               color="white"
               size={30}
               style={{ padding: 15 }}
@@ -461,7 +461,7 @@ export default class App extends React.Component {
             }}
           >
             <Icon
-              name="thumb-up-outline"
+              name="heart-outline"
               color="white"
               size={30}
               style={{ padding: 15 }}

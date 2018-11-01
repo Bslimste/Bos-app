@@ -21,6 +21,7 @@ import {
   Easing,
   Text
 } from "react-native";
+import { FluidNavigator, Transition } from "react-navigation-fluid-transitions";
 
 import One from "../screens/One";
 import Two from "../screens/Two";
@@ -30,6 +31,8 @@ import Login from "../screens/Login";
 import Exchange from "../screens/Exchange";
 import RequestDetail from "../screens/RequestDetail";
 import Profile from "../screens/Profile";
+import Challenge from "../screens/Challenge";
+import ChallengeDetails from "../screens/ChallengeDetails";
 import ProjectDetail from "../screens/ProjectDetail/ProjectDetail";
 import Detail from "../screens/ProjectDetail/Detail";
 import Updates from "../screens/ProjectDetail/Updates";
@@ -86,7 +89,7 @@ export const OneStack = StackNavigator(
     One: {
       screen: One,
       navigationOptions: {
-        title: "One"
+        title: "Discover"
       }
     }
   },
@@ -109,7 +112,7 @@ export const TwoStack = StackNavigator(
   }
 );
 
-export const ProjectsStack = StackNavigator(
+export const ProjectsStack = FluidNavigator(
   {
     Projects: {
       screen: Projects,
@@ -168,6 +171,27 @@ export const ExchangeStack = StackNavigator(
       screen: RequestDetail,
       navigationOptions: {
         title: "Marktplaats"
+      }
+    }
+  },
+  {
+    headerMode: "none"
+  }
+);
+
+export const ChallengeStack = StackNavigator(
+  {
+    Challenge: {
+      screen: Challenge,
+      navigationOptions: {
+        title: "Challenge"
+      }
+    },
+
+    ChallengeDetails: {
+      screen: ChallengeDetails,
+      navigationOptions: {
+        title: "Challenge"
       }
     }
   },
@@ -263,11 +287,18 @@ export const MyTab = TabNavigator(
     ExchangeStack: {
       screen: ExchangeStack,
       navigationOptions: {
-        tabBarLabel: "Markt",
+        tabBarLabel: "Marktplaats",
         tabBarIcon: (
           <Icon size={25} name={"compare-arrows"} style={{ color: "grey" }} />
         )
       }
+    },
+    ChallengeStack: {
+      screen: ChallengeStack,
+      navigationOptions: "Challenge",
+      tabBarIcon: (
+        <Icon size={25} name={"horseshoe"} style={{ color: "grey" }} />
+      )
     }
   },
   {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image} from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions} from "react-native";
 import { Toolbar } from "react-native-material-ui";
 import LocalStorage from "../config/localStorage.js";
 import Api from "../config/api.js";
@@ -18,6 +18,9 @@ export default class RequestDetail extends Component {
     const description = navigation.getParam("description", "");
     const necessity = navigation.getParam("necessity", "");
     const profilePhoto = navigation.getParam("profilePhoto", "");
+    const offered = navigation.getParam("offered", "");
+    console.log(offered);
+    const picture = navigation.getParam("picture", "");
     return (
       <View style={{ width: "100%", height: "100%" }}>
         <Toolbar
@@ -26,19 +29,28 @@ export default class RequestDetail extends Component {
           onLeftElementPress={() => this.props.navigation.toggleDrawer()}
         />
         <View style={styles.container}>
+        { offered && 
+                    <Image
+                        source={{ uri: picture }}
+                        resizeMode="cover"
+                        style={{ width: Dimensions.get("window").width, height: 175}}
+                    />
+                }
             <View style={styles.cardContainer}>
-                <Text style={{
-                        fontWeight: "bold",
-                        fontSize: 25,
-                        color: "black"
-                }}>
-                    {title}
-                </Text>
-                <Image
-                    source={{ uri: profilePhoto }}
-                    resizeMode="cover"
-                    style={{ width: 75, height: 75, borderRadius:30}}
-                />
+                <View style={styles.cardHeader}>
+                    <Image
+                        source={{ uri: profilePhoto }}
+                        resizeMode="cover"
+                        style={{ width: 75, height: 75, borderRadius:30}}
+                    />
+                    <Text style={{
+                            fontWeight: "bold",
+                            fontSize: 25,
+                            color: "black"
+                    }}>
+                        {title}
+                    </Text>
+                </View>
                 <View style={styles.descContainer}>
                     <Text>
                         {description}
@@ -67,7 +79,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "flex-start",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   cardContainer: {
     backgroundColor: "white",
@@ -78,18 +90,24 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 3,
     padding: 5,
-    margin: 50,
     flex: 1,
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   descContainer: {
     marginTop: 10,
     marginLeft: 5,
     marginRight: 5,
-    flex: 1,
+    flex: 3,
     justifyContent: "flex-start"
   },
   necessityContainer: {
     marginTop: 50
+  },
+  cardHeader: {
+    flex:1,
+    flexDirection: "row",
+    alignItems: "flex-start",
+    alignSelf: "center",
+    width: Dimensions.get("window").width
   }
 });
