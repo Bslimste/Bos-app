@@ -4,21 +4,21 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "fixReactViro": "find ./node_modules/react-viro/components -type f -exec sed -i '' 's#^import normalizeColor from \"react-native/Libraries/StyleSheet/normalizeColor\"#// import normalizeColor from \"react-native/Libraries/StyleSheet/normalizeColor\"#g' {} \\;",
-    "postinstall": "yarn run fixReactViro"
+    "test": "jest"
   },
   "dependencies": {
     "@pusher/chatkit": "^0.7.18",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.4",
     "react-native-card-flip": "^1.0.4",
+    "react-native-carousel-view": "^0.5.1",
     "react-native-flash-message": "^0.1.10",
     "react-native-gifted-chat": "^0.4.3",
     "react-native-linear-gradient": "^2.4.3",
     "react-native-material-bottom-navigation-performance": "^0.7.8",
     "react-native-material-textfield": "^0.12.0",
     "react-native-material-ui": "^1.30.1",
+    "react-native-onesignal": "^3.2.7",
     "react-native-paper": "^2.1.3",
     "react-native-splash-screen": "^3.1.1",
     "react-native-swipe-cards": "^0.1.1",

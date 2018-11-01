@@ -14,7 +14,6 @@ export default class Api {
   }
 
   callApi(action, method, data, callBack = response => console.log(response)) {
-    console.log(" calling");
     if (method == "GET") {
       fetch(this.url + action, {
         method: method,
@@ -28,7 +27,6 @@ export default class Api {
           callBack(error);
         });
     } else if (method == "POST") {
-      console.log(this.url + action);
       fetch(this.url + action, {
         method: method,
         headers: {

@@ -66,6 +66,11 @@ class SideMenu extends Component {
                 onPress: () => this.props.navigation.navigate("FourStack")
               },
               {
+                  icon: "power-settings-new",
+                  value: "ProjectDetail",
+                  onPress: () => this.props.navigation.navigate("ProjectDetailStack")
+              },
+              {
                 icon: "account-circle",
                 value: "Login",
                 onPress: () => this.props.navigation.navigate("Login")

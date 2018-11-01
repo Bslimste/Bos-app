@@ -4,26 +4,26 @@ import { Toolbar } from "react-native-material-ui";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default class Two extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
 
-  render() {
-    return (
-      <View style={{ width: "100%", height: "100%", backgroundColor: "white" }}>
-        <Toolbar
-          leftElement="menu"
-          centerElement="Profile"
-          onLeftElementPress={() => this.props.navigation.toggleDrawer()}
-        />
-        <Image
-          style={{ height: 200, width: "100%" }}
-          source={{
-            uri:
-              "https://cdn1.thr.com/sites/default/files/2017/08/gettyimages-630421358_-_h_2017.jpg"
-          }}
-        />
+    render() {
+        return (
+            <View style={{ width: "100%", height: "100%", backgroundColor: "white" }}>
+                <Toolbar
+                    leftElement="menu"
+                    centerElement="Profile"
+                    onLeftElementPress={() => this.props.navigation.toggleDrawer()}
+                />
+                <Image
+                    style={{ height: 200, width: "100%" }}
+                    source={{
+                        uri:
+                            "https://cdn1.thr.com/sites/default/files/2017/08/gettyimages-630421358_-_h_2017.jpg"
+                    }}
+                />
 
         <View
           style={{
@@ -163,9 +163,9 @@ export default class Two extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  }
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    }
 });
