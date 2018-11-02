@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity
+} from "react-native";
 import { Toolbar } from "react-native-material-ui";
 import LocalStorage from "../config/localStorage.js";
 import Api from "../config/api.js";
@@ -37,11 +44,20 @@ export default class RequestDetail extends Component {
           )}
           <View style={styles.cardContainer}>
             <View style={styles.cardHeader}>
-              <Image
-                source={{ uri: profilePhoto }}
-                resizeMode="cover"
-                style={{ width: 50, height: 50, borderRadius: 50 }}
-              />
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("Profile", {
+                    picture: picture,
+                    name: owner
+                  })
+                }
+              >
+                <Image
+                  source={{ uri: profilePhoto }}
+                  resizeMode="cover"
+                  style={{ width: 50, height: 50, borderRadius: 50 }}
+                />
+              </TouchableOpacity>
               <View
                 style={{
                   flexDirection: "column",

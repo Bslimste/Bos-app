@@ -74,7 +74,13 @@ class SideMenu extends Component {
               {
                 icon: "person",
                 value: "Mijn profiel",
-                onPress: () => this.props.navigation.navigate("ProfileStack")
+                onPress: () => {
+                  this.props.navigation.navigate("ProfileStack", {
+                    picture:
+                      "http://gromdroid.nl/bslim/wp-content/uploads/2018/10/hoi-34.jpg",
+                    name: "Jelmer Haarman"
+                  });
+                }
               },
               {
                 icon: "folder",

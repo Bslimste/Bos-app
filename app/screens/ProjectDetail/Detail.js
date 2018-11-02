@@ -50,7 +50,7 @@ export default class Detail extends Component {
             </View>
 
             <TouchableOpacity
-              onPress={() => this.props.navigation.dispatch("TwoStack")}
+              onPress={() => this.props.navigation.navigate("Login")}
               style={{
                 width: 50,
                 height: 50,
