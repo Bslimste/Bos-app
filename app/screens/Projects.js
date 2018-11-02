@@ -55,7 +55,7 @@ export default class Three extends Component {
         <Toolbar
           leftElement="menu"
           onLeftElementPress={() => this.props.navigation.toggleDrawer()}
-          centerElement="Projects"
+          centerElement="Projecten"
         />
         <View>
           <FlatList
@@ -77,14 +77,16 @@ export default class Three extends Component {
               <View style={styles.container}>
                 <View style={styles.card} elevation={5}>
                   <TouchableHighlight
-                    onPress={() =>
+                    onPress={() => {
+                      ls = LocalStorage.getInstance();
+                      ls.saveProjectDetail(item);
                       this.props.navigation.navigate("ProjectDetail", {
                         title: item.title,
                         thumbnail: item.thumbnail,
                         likes: item.likes,
                         desc: item.desc
-                      })
-                    }
+                      });
+                    }}
                   >
                     <View>
                       <Transition shared={item.title}>

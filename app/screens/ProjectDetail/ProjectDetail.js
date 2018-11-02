@@ -6,11 +6,13 @@ import Detail from "./Detail.js";
 import Updates from "./Updates.js";
 import { DetailTab } from "../../config/router.js";
 import { FluidNavigator, Transition } from "react-navigation-fluid-transitions";
+import LocalStorage from "../../config/localStorage.js";
+import { NavigationActions } from "react-navigation";
 
 export default class ProjectDetail extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { bookmarked: "bookmark" };
   }
 
   render() {
@@ -23,9 +25,18 @@ export default class ProjectDetail extends Component {
     return (
       <View style={{ width: "100%", height: "100%" }}>
         <Toolbar
-          leftElement="menu"
-          centerElement="Project detail"
-          onLeftElementPress={() => this.props.navigation.toggleDrawer()}
+          iconSet="MaterialCommunityIcons"
+          leftElement={"arrow-left"}
+          onLeftElementPress={() => this.props.navigation.goBack()}
+          rightElement={this.state.bookmarked}
+          onRightElementPress={() => {
+            if (this.state.bookmarked == "bookmark") {
+              this.setState({ bookmarked: "marker-check" });
+            } else {
+              this.setState({ bookmarked: "bookmark" });
+            }
+          }}
+          centerElement="Project informatie"
           style={{ marginBottom: "60vh" }}
         />
         <View style={styles.container}>

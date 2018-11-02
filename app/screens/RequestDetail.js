@@ -23,9 +23,10 @@ export default class RequestDetail extends Component {
     return (
       <View style={{ width: "100%", height: "100%" }}>
         <Toolbar
-          leftElement="menu"
+          iconSet="MaterialCommunityIcons"
+          leftElement={"arrow-left"}
+          onLeftElementPress={() => this.props.navigation.goBack()}
           centerElement="Exchange"
-          onLeftElementPress={() => this.props.navigation.toggleDrawer()}
         />
         <View style={styles.container}>
           {offered && (
