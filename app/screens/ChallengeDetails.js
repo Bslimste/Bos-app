@@ -1,25 +1,34 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  ScrollView
+} from "react-native";
 import { Toolbar } from "react-native-material-ui";
 import LocalStorage from "../config/localStorage.js";
 import Api from "../config/api.js";
 
-export default class RequestDetail extends Component {
+export default class ChallengeDetails extends Component {
   constructor() {
     super();
     this.state = {};
   }
   render() {
     const { navigation } = this.props;
+    const contactInfo = navigation.getParam("contactInfo", "");
+    const createdAt = navigation.getParam("createdAt", "");
+    const deadLine = navigation.getParam("deadLine", "");
+    const deadLineDate = navigation.getParam("deadLineDate", "");
+    const description = navigation.getParam("description", "");
     const id = navigation.getParam("id", "");
+    const organisation = navigation.getParam("organisation", "");
     const owner = navigation.getParam("owner", "");
     const ownerId = navigation.getParam("ownerId", "");
-    const title = navigation.getParam("title", "");
-    const description = navigation.getParam("description", "");
-    const necessity = navigation.getParam("necessity", "");
     const profilePhoto = navigation.getParam("profilePhoto", "");
-    const offered = navigation.getParam("offered", "");
-    const picture = navigation.getParam("picture", "");
+    const title = navigation.getParam("title", "");
     return (
       <View style={{ width: "100%", height: "100%" }}>
         <Toolbar
@@ -29,13 +38,6 @@ export default class RequestDetail extends Component {
           centerElement="Exchange"
         />
         <View style={styles.container}>
-          {offered && (
-            <Image
-              source={{ uri: picture }}
-              resizeMode="cover"
-              style={{ width: Dimensions.get("window").width, height: 175 }}
-            />
-          )}
           <View style={styles.cardContainer}>
             <View style={styles.cardHeader}>
               <Image
@@ -53,21 +55,37 @@ export default class RequestDetail extends Component {
                 {title}
               </Text>
             </View>
-            <View style={styles.descContainer}>
-              <Text>{description}</Text>
-              <View style={styles.necessityContainer}>
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: 25,
-                    color: "black"
-                  }}
-                >
-                  Wat:
-                </Text>
-                <Text>- {necessity}</Text>
+            <ScrollView style={{ marginTop: 100 }}>
+              <View style={styles.descContainer}>
+                <Text>{description}</Text>
+                <View style={styles.metaDataContainer}>
+                  <View style={styles.metaDataContainer}>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: 25,
+                        color: "black"
+                      }}
+                    >
+                      Inleveren:
+                    </Text>
+                    <Text>Mail je antwoord naar {contactInfo}</Text>
+                  </View>
+                  <View style={styles.metaDataContainer}>
+                    <Text
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: 25,
+                        color: "black"
+                      }}
+                    >
+                      Deadline:
+                    </Text>
+                    <Text>Lever je antwoord in voor {deadLineDate}</Text>
+                  </View>
+                </View>
               </View>
-            </View>
+            </ScrollView>
           </View>
         </View>
       </View>
@@ -100,8 +118,8 @@ const styles = StyleSheet.create({
     flex: 3,
     justifyContent: "flex-start"
   },
-  necessityContainer: {
-    marginTop: 50
+  metaDataContainer: {
+    marginTop: 30
   },
   cardHeader: {
     flex: 1,

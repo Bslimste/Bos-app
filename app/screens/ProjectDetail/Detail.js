@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
   ScrollView
 } from "react-native";
+import LocalStorage from "../../config/localStorage.js";
+import Icon from "react-native-vector-icons/MaterialIcons";
+import { NavigationActions } from "react-navigation";
 
 export default class Detail extends Component {
   constructor(props) {
@@ -15,22 +18,61 @@ export default class Detail extends Component {
   }
 
   render() {
+    const localStorage = LocalStorage.getInstance();
+    const detailData = localStorage.getProjectDetail();
     return (
       <View style={{ width: "100%", height: "100%", backgroundColor: "white" }}>
         <ScrollView>
           <View
             style={{
-              flexDirection: "column",
+              flexDirection: "row",
               height: 60,
               width: "100%",
               padding: 10,
               paddingLeft: 30
             }}
           >
-            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-              Bartel-Jaap
-            </Text>
-            <Text style={{ fontSize: 16 }}>IT Profesional</Text>
+            <View
+              style={{
+                flexDirection: "column",
+                height: 60,
+                width: "100%",
+                padding: 10,
+                paddingLeft: 20
+              }}
+            >
+              <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                {detailData.title}
+              </Text>
+              <Text style={{ fontSize: 16 }}>
+                Door: {detailData.creatorName}
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              onPress={() => this.props.navigation.dispatch("TwoStack")}
+              style={{
+                width: 50,
+                height: 50,
+                borderRadius: 60,
+                padding: 15,
+                backgroundColor: "#03a9f4",
+                position: "absolute",
+                top: 25,
+                right: 20,
+                //ios
+                shadowOpacity: 0.3,
+                shadowRadius: 3,
+                shadowOffset: {
+                  height: 0,
+                  width: 0
+                },
+                //android
+                elevation: 1
+              }}
+            >
+              <Icon size={20} name={"message"} style={{ color: "white" }} />
+            </TouchableOpacity>
           </View>
           <View style={{ width: "100%", flexDirection: "column" }}>
             <View
@@ -68,11 +110,7 @@ export default class Detail extends Component {
                   this.setState({ height: event.nativeEvent.layout.height });
                 }}
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non
-                lacinia nibh. Pellentesque faucibus ante sed enim fringilla,
-                accumsan malesuada elit mollis. Fusce posuere tincidunt quam sed
-                consequat. Phasellus eu erat eu turpis mattis aliquet nec non
-                ante.
+                {detailData.desc}
               </Text>
             </View>
           </View>

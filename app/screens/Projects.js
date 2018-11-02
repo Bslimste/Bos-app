@@ -20,8 +20,10 @@ import {
   View
 } from "react-native";
 import Api from "../config/api.js";
+import LocalStorage from "../config/localStorage.js";
 import { Toolbar } from "react-native-material-ui";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { FluidNavigator, Transition } from "react-navigation-fluid-transitions";
 
 export default class Three extends Component {
   constructor() {
@@ -36,21 +38,13 @@ export default class Three extends Component {
     };
 
     let api = Api.getInstance();
-    console.log(" hallo");
-    api.callApi(
-      "getAllProjects",
-      "POST",
-      {
-        hello: "hello"
-      },
-      response => {
-        console.log(response["response"]);
-        this.setState({
-          data: response["response"],
-          loading: false
-        });
-      }
-    );
+    api.callApi("getAllProjects", "POST", {}, response => {
+      console.log(response["response"]);
+      this.setState({
+        data: response["response"],
+        loading: false
+      });
+    });
   }
 
   render() {
@@ -61,18 +55,7 @@ export default class Three extends Component {
         <Toolbar
           leftElement="menu"
           onLeftElementPress={() => this.props.navigation.toggleDrawer()}
-          centerElement={
-            <Text
-              style={{
-                marginLeft: 75,
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 20
-              }}
-            >
-              Projecten
-            </Text>
-          }
+          centerElement="Projecten"
         />
         <View>
           <FlatList
@@ -94,21 +77,26 @@ export default class Three extends Component {
               <View style={styles.container}>
                 <View style={styles.card} elevation={5}>
                   <TouchableHighlight
-                    onPress={() =>
+                    onPress={() => {
+                      ls = LocalStorage.getInstance();
+                      ls.saveProjectDetail(item);
                       this.props.navigation.navigate("ProjectDetail", {
                         title: item.title,
                         thumbnail: item.thumbnail,
                         likes: item.likes,
                         desc: item.desc
-                      })
-                    }
+                      });
+                    }}
                   >
                     <View>
-                      <Image
-                        source={{ uri: item.thumbnail }}
-                        resizeMode="cover"
-                        style={{ width: "100%", height: 150 }}
-                      />
+                      <Transition shared={item.title}>
+                        <Image
+                          source={{ uri: item.thumbnail }}
+                          resizeMode="cover"
+                          style={{ width: "100%", height: 150 }}
+                        />
+                      </Transition>
+
                       <View
                         style={{
                           flexDirection: "column",
@@ -151,7 +139,7 @@ export default class Three extends Component {
                             color: "#e95827"
                           }}
                         >
-                          By Tommy de Vries
+                          By {item.creatorName}
                         </Text>
                       </View>
                       <TouchableOpacity
@@ -164,6 +152,21 @@ export default class Three extends Component {
                           position: "absolute",
                           bottom: 5,
                           right: 5
+                        }}
+                        onPress={() => {
+                          api = Api.getInstance();
+                          ls = LocalStorage.getInstance();
+                          userData = {
+                            project: item.id,
+                            user: 1,
+                            deviceId: ls.getPlayerId()
+                          };
+                          api.callApi(
+                            "addFollower",
+                            "POST",
+                            userData,
+                            response => {}
+                          );
                         }}
                       >
                         <Icon
