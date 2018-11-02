@@ -36,8 +36,8 @@ export default class ProjectDetail extends Component {
                 height={200}
                 delay={3000}
                 indicatorAtBottom={true}
-                indicatorSize={20}
-                indicatorColor="black"
+                indicatorSize={10}
+                indicatorColor="white"
               >
                 <View style={styles.contentContainer}>
                   <Image

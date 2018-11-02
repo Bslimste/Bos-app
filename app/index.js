@@ -15,7 +15,10 @@ import Api from "./config/api.js";
 // you can set your style right here, it'll be propagated to application
 const uiTheme = {
   palette: {
-    primaryColor: "#9e9e9e"
+    primaryColor: "white",
+    primaryTextColor: "black",
+    secondaryTextColor: "black",
+    alternateTextColor: "black"
   },
   toolbar: {
     container: {
