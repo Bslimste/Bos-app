@@ -21,7 +21,6 @@ export default class Two extends Component {
 
     const name = navigation.getParam("name", "");
     const picture = navigation.getParam("profilePhoto", "");
-    console.log(picture)
 
     return (
       <ScrollView>
