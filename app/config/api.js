@@ -3,7 +3,7 @@ import React from "react";
 export default class Api {
   static instance = null;
 
-  url = "http://192.168.43.74:5000/";
+  url = "http://192.168.43.73:5000/";
 
   static getInstance() {
     if (Api.instance == null) {

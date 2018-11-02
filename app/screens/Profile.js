@@ -20,7 +20,7 @@ export default class Two extends Component {
     const { navigation } = this.props;
 
     const name = navigation.getParam("name", "");
-    const picture = navigation.getParam("picture", "");
+    const picture = navigation.getParam("profilePhoto", "");
 
     return (
       <ScrollView>

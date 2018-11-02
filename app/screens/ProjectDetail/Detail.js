@@ -36,9 +36,9 @@ export default class Detail extends Component {
               style={{
                 flexDirection: "column",
                 height: 60,
-                width: "100%",
+                width: "80%",
                 padding: 10,
-                paddingLeft: 20
+                paddingLeft: 20,
               }}
             >
               <Text style={{ fontWeight: "bold", fontSize: 20 }}>
@@ -80,7 +80,8 @@ export default class Detail extends Component {
                 height: 40,
                 width: "100%",
                 flexDirection: "row",
-                paddingTop: 20
+                paddingTop: 20,
+                marginTop: 70
               }}
             >
               <Image

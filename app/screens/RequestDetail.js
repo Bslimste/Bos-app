@@ -27,6 +27,7 @@ export default class RequestDetail extends Component {
     const profilePhoto = navigation.getParam("profilePhoto", "");
     const offered = navigation.getParam("offered", "");
     const picture = navigation.getParam("picture", "");
+    console.log(picture)
     return (
       <View style={{ width: "100%", height: "100%" }}>
         <Toolbar
@@ -47,7 +48,7 @@ export default class RequestDetail extends Component {
               <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.navigate("Profile", {
-                    picture: picture,
+                    profilePhoto: profilePhoto,
                     name: owner
                   })
                 }
