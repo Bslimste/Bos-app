@@ -355,14 +355,16 @@ export const DetailTab = TabNavigator(
       screen: DetailStack,
       navigationOptions: {
         tabBarLabel: "Detail",
-        tabBarIcon: <Icon size={25} name={"dog"} style={{ color: "grey" }} />
+        tabBarIcon: <Icon size={25} name={"info"} style={{ color: "grey" }} />
       }
     },
     UpdatesStack: {
       screen: UpdatesStack,
       navigationOptions: {
         tabBarLabel: "Updates",
-        tabBarIcon: <Icon size={25} name={"cat"} style={{ color: "grey" }} />
+        tabBarIcon: (
+          <Icon size={25} name={"timeline"} style={{ color: "grey" }} />
+        )
       }
     }
   },
@@ -388,12 +390,12 @@ export const DetailTab = TabNavigator(
         tabs: {
           DetailStack: {
             activeIcon: (
-              <Icon size={25} name={"dog"} style={{ color: "#2196f3" }} />
+              <Icon size={25} name={"info"} style={{ color: "#2196f3" }} />
             )
           },
           UpdatesStack: {
             activeIcon: (
-              <Icon size={25} name={"cat"} style={{ color: "#2196f3" }} />
+              <Icon size={25} name={"timeline"} style={{ color: "#2196f3" }} />
             )
           }
         }
