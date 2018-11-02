@@ -135,34 +135,37 @@ export default class Exchange extends Component {
               <Image
                 source={{ uri: item.profilePhoto }}
                 resizeMode="cover"
-                style={{ width: 50, height: 50, borderRadius: 50 }}
+                style={{ width: 50, height: 50, borderRadius: 50, margin: 15 }}
               />
-
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "bold",
-                  padding: 0,
-                  paddingLeft: 15,
-                  paddingRight: 15,
-                  paddingTop: 10
-                }}
-                numberOfLines={2}
+              <View
+                style={{ flexDirection: "column", justifyContent: "center" }}
               >
-                {item.title}
-              </Text>
-              <Text
-                style={{
-                  fontSize: 12,
-                  padding: 0,
-                  paddingLeft: 15,
-                  paddingRight: 15,
-                  color: "#e95827",
-                  paddingBottom: 10
-                }}
-              >
-                {item.location}
-              </Text>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "bold",
+                    padding: 0,
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    paddingTop: 10
+                  }}
+                  numberOfLines={2}
+                >
+                  {item.title}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    padding: 0,
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    color: "#e95827",
+                    paddingBottom: 10
+                  }}
+                >
+                  {item.location}
+                </Text>
+              </View>
             </TouchableOpacity>
           )}
         />
@@ -228,7 +231,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 3,
     margin: 5,
-    width: Dimensions.get("window").width,
+    width: "97%",
     flex: 1,
     flexDirection: "row"
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, Dimensions} from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import { Toolbar } from "react-native-material-ui";
 import LocalStorage from "../config/localStorage.js";
 import Api from "../config/api.js";
@@ -7,7 +7,7 @@ import Api from "../config/api.js";
 export default class RequestDetail extends Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {};
   }
   render() {
     const { navigation } = this.props;
@@ -28,46 +28,50 @@ export default class RequestDetail extends Component {
           onLeftElementPress={() => this.props.navigation.toggleDrawer()}
         />
         <View style={styles.container}>
-        { offered && 
-                    <Image
-                        source={{ uri: picture }}
-                        resizeMode="cover"
-                        style={{ width: Dimensions.get("window").width, height: 175}}
-                    />
-                }
-            <View style={styles.cardContainer}>
-                <View style={styles.cardHeader}>
-                    <Image
-                        source={{ uri: profilePhoto }}
-                        resizeMode="cover"
-                        style={{ width: 75, height: 75, borderRadius:30}}
-                    />
-                    <Text style={{
-                            fontWeight: "bold",
-                            fontSize: 25,
-                            color: "black"
-                    }}>
-                        {title}
-                    </Text>
-                </View>
-                <View style={styles.descContainer}>
-                    <Text>
-                        {description}
-                    </Text>
-                    <View style={styles.necessityContainer}>
-                        <Text style={{
-                            fontWeight: "bold",
-                            fontSize: 25,
-                            color: "black"
-                        }}>
-                            Wat:
-                        </Text>
-                        <Text>
-                            - {necessity}
-                        </Text>
-                    </View>
-                </View>
+          {offered && (
+            <Image
+              source={{ uri: picture }}
+              style={{ width: "100%", height: 175 }}
+            />
+          )}
+          <View style={styles.cardContainer}>
+            <View style={styles.cardHeader}>
+              <Image
+                source={{ uri: profilePhoto }}
+                resizeMode="cover"
+                style={{ width: 50, height: 50, borderRadius: 50 }}
+              />
+              <View
+                style={{
+                  flexDirection: "column",
+                  height: 60,
+                  width: "100%",
+                  padding: 10,
+                  paddingTop: 5
+                }}
+              >
+                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                  {title}
+                </Text>
+                <Text style={{ fontSize: 16 }}>{owner}</Text>
+              </View>
             </View>
+            <View style={styles.descContainer}>
+              <Text>{description}</Text>
+              <View style={styles.necessityContainer}>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 16,
+                    color: "black"
+                  }}
+                >
+                  Wat:
+                </Text>
+                <Text>- {necessity}</Text>
+              </View>
+            </View>
+          </View>
         </View>
       </View>
     );
@@ -76,34 +80,28 @@ export default class RequestDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "flex-start",
-    alignItems: "flex-start",
+    alignItems: "flex-start"
   },
   cardContainer: {
     backgroundColor: "white",
-    borderRadius: 10,
-    borderWidth: 1,
+    height: "100%",
     shadowOffset: { width: 0, height: 13 },
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 3,
     padding: 5,
-    flex: 1,
-    alignItems: "flex-start",
+    alignItems: "flex-start"
   },
   descContainer: {
-    marginTop: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    flex: 3,
+    margin: 25,
     justifyContent: "flex-start"
   },
   necessityContainer: {
     marginTop: 50
   },
   cardHeader: {
-    flex:1,
+    margin: 10,
     flexDirection: "row",
     alignItems: "flex-start",
     alignSelf: "center",

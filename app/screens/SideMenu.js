@@ -15,6 +15,8 @@ import {
   Avatar
 } from "react-native-material-ui";
 
+let login = "df";
+
 class SideMenu extends Component {
   navigateToScreen = route => () => {
     const navigate = NavigationActions.navigate({
@@ -29,6 +31,11 @@ class SideMenu extends Component {
     console.log(ls.getUserId());
     if (ls.getUserId() != "") {
       boolean = true;
+    }
+    if (boolean) {
+      login = "Logout";
+    } else {
+      login = "Login";
     }
     const loggedIn = boolean;
     return (
@@ -83,8 +90,28 @@ class SideMenu extends Component {
               },
               {
                 icon: "close",
-                value: "Logout",
-                onPress: () => this.props.navigation.navigate("LoginStack")
+                value: login,
+                onPress: () => {
+                  if (loggedIn) {
+                    let ls = LocalStorage.getInstance();
+
+                    api.callApi(
+                      "logout",
+                      "POST",
+                      { id: ls.getUserId() },
+                      response => {
+                        console.log(response);
+                        ls.saveUserId("");
+                        //Redirect user to somewhere
+                        this.props.navigation.dispatch(
+                          NavigationActions.back()
+                        );
+                      }
+                    );
+                  } else {
+                    this.props.navigation.navigate("LoginStack");
+                  }
+                }
               }
             ]}
           />

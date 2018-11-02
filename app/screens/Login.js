@@ -12,6 +12,7 @@ import LocalStorage from "../config/localStorage.js";
 import { Toolbar, Card } from "react-native-material-ui";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { TextField } from "react-native-material-textfield";
+import { NavigationActions } from "react-navigation";
 
 export default class Login extends Component {
   constructor() {
@@ -69,22 +70,24 @@ export default class Login extends Component {
   }
 
   login() {
-  	console.log("hallo")
-  	if(this.state.email != "" && this.state.password != "") {
-  		console.log("hier")
-  		let api = Api.getInstance()
-  		let userData = {
-  			email: this.state.email,
-  			password: this.state.password
-  		}
-  		api.callApi("login", "POST", userData, response => {
-  			if(response['response'].succes) {
-  				let ls = LocalStorage.getInstance()
-  				ls.saveUserId(response['response'].userId)
-  				//Redirect user to somewhere
-  			}
-  		})
-	}
+    console.log("hallo");
+    if (this.state.email != "" && this.state.password != "") {
+      console.log("hier");
+      let api = Api.getInstance();
+      let userData = {
+        email: this.state.email,
+        password: this.state.password
+      };
+      api.callApi("login", "POST", userData, response => {
+        console.log(response);
+        if (response["response"].succes) {
+          let ls = LocalStorage.getInstance();
+          ls.saveUserId(response["response"].userId);
+          //Redirect user to somewhere
+          this.props.navigation.dispatch(NavigationActions.back());
+        }
+      });
+    }
   }
 
   render() {
@@ -304,7 +307,6 @@ export default class Login extends Component {
                     alignItems: "center",
                     justifyContent: "center"
                   }}
-                  
                 >
                   <Text style={{ color: "#cfd8dc" }}>GO</Text>
                 </TouchableOpacity>

@@ -6,7 +6,7 @@ import {
   Header,
   DrawerItems
 } from "react-navigation";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { NavigationComponent } from "react-native-material-bottom-navigation-performance";
 import { Drawer, Avatar } from "react-native-material-ui";
@@ -264,34 +264,35 @@ export const MyTab = TabNavigator(
       navigationOptions: {
         tabBarLabel: "Discover",
         tabBarIcon: (
-          <Icon size={25} name={"favorite-border"} style={{ color: "grey" }} />
+          <Icon size={25} name={"heart-outline"} style={{ color: "grey" }} />
         )
       }
     },
     ProjectsStack: {
       screen: ProjectsStack,
       navigationOptions: {
-        tabBarLabel: "Projects",
+        tabBarLabel: "Browse",
         tabBarIcon: (
-          <Icon size={25} name={"explore"} style={{ color: "grey" }} />
+          <Icon size={25} name={"compass"} style={{ color: "grey" }} />
         )
       }
     },
     ExchangeStack: {
       screen: ExchangeStack,
       navigationOptions: {
-        tabBarLabel: "Marktplaats",
+        tabBarLabel: "Market",
         tabBarIcon: (
-          <Icon size={25} name={"compare-arrows"} style={{ color: "grey" }} />
+          <Icon size={25} name={"bank-transfer"} style={{ color: "grey" }} />
         )
       }
     },
     ChallengeStack: {
       screen: ChallengeStack,
-      navigationOptions: "Challenge",
-      tabBarIcon: (
-        <Icon size={25} name={"horseshoe"} style={{ color: "grey" }} />
-      )
+      navigationOptions: {
+        tabBarLabel: "Challenge",
+
+        tabBarIcon: <Icon size={25} name={"trophy"} style={{ color: "grey" }} />
+      }
     }
   },
   {
@@ -318,23 +319,28 @@ export const MyTab = TabNavigator(
             activeIcon: (
               <Icon
                 size={25}
-                name={"favorite-border"}
+                name={"heart-outline"}
                 style={{ color: "#2196f3" }}
               />
             )
           },
           ProjectsStack: {
             activeIcon: (
-              <Icon size={25} name={"explore"} style={{ color: "#2196f3" }} />
+              <Icon size={25} name={"compass"} style={{ color: "#2196f3" }} />
             )
           },
           ExchangeStack: {
             activeIcon: (
               <Icon
                 size={25}
-                name={"compare-arrows"}
+                name={"bank-transfer"}
                 style={{ color: "#2196f3" }}
               />
+            )
+          },
+          ChallengeStack: {
+            activeIcon: (
+              <Icon size={25} name={"trophy"} style={{ color: "#2196f3" }} />
             )
           }
         }
