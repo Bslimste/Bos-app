@@ -438,17 +438,18 @@ export default class App extends React.Component {
           <TouchableOpacity
             style={{
               backgroundColor: "#03a9f4",
-              borderRadius: 60,
-              height: 60,
-              width: 60,
-              marginLeft: 25
+              borderRadius: 45,
+              height: 45,
+              width: 45,
+              marginLeft: 25,
+              marginTop: 10
             }}
           >
             <Icon
               name="message-text-outline"
               color="white"
-              size={30}
-              style={{ padding: 15 }}
+              size={20}
+              style={{ padding: 13 }}
             />
           </TouchableOpacity>
           <TouchableOpacity

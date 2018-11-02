@@ -8,9 +8,11 @@ import {
   Easing
 } from "react-native";
 import Api from "../config/api.js";
+import LocalStorage from "../config/localStorage.js";
 import { Toolbar, Card } from "react-native-material-ui";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { TextField } from "react-native-material-textfield";
+import { NavigationActions } from "react-navigation";
 
 export default class Login extends Component {
   constructor() {
@@ -19,7 +21,7 @@ export default class Login extends Component {
     this.animatedValue1 = new Animated.Value(0);
 
     this.state = {
-      username: "",
+      email: "",
       password: "",
       login: true,
       register: false
@@ -65,6 +67,27 @@ export default class Login extends Component {
       easing: Easing.linear,
       extrapolate: "clamp"
     }).start(() => this.setState({ login: true }));
+  }
+
+  login() {
+    console.log("hallo");
+    if (this.state.email != "" && this.state.password != "") {
+      console.log("hier");
+      let api = Api.getInstance();
+      let userData = {
+        email: this.state.email,
+        password: this.state.password
+      };
+      api.callApi("login", "POST", userData, response => {
+        console.log(response);
+        if (response["response"].succes) {
+          let ls = LocalStorage.getInstance();
+          ls.saveUserId(response["response"].userId);
+          //Redirect user to somewhere
+          this.props.navigation.dispatch(NavigationActions.back());
+        }
+      });
+    }
   }
 
   render() {
@@ -168,13 +191,13 @@ export default class Login extends Component {
                 </View>
                 <View style={styles.cardBody}>
                   <TextField
-                    label="Username"
-                    value={this.state.username}
+                    label="Email"
+                    value={this.state.email}
                     containerStyle={{ width: 250 }}
                     tintColor="white"
                     baseColor="white"
                     inputContainerPadding={0}
-                    onChangeText={username => this.setState({ username })}
+                    onChangeText={email => this.setState({ email })}
                   />
                   <TextField
                     label="Password"
@@ -238,18 +261,19 @@ export default class Login extends Component {
             </View>
             <View style={styles.cardBody}>
               <TextField
-                label="Username"
-                value={this.state.username}
+                label="Email"
+                value={this.state.email}
                 containerStyle={{ width: 250 }}
-                onChangeText={username => this.setState({ username })}
+                onChangeText={email => this.setState({ email })}
               />
               <TextField
                 label="Password"
                 value={this.state.password}
+                secureTextEntry={true}
                 containerStyle={{ width: 250 }}
                 onChangeText={password => this.setState({ password })}
               />
-              {this.state.username != "" &&
+              {this.state.email != "" &&
                 this.state.password != "" && (
                   <TouchableOpacity
                     style={{
@@ -264,11 +288,12 @@ export default class Login extends Component {
                       alignItems: "center",
                       justifyContent: "center"
                     }}
+                    onPress={() => this.login()}
                   >
                     <Text style={{ color: "#2196f3" }}>GO</Text>
                   </TouchableOpacity>
                 )}
-              {(this.state.username == "" || this.state.password == "") && (
+              {(this.state.email == "" || this.state.password == "") && (
                 <TouchableOpacity
                   style={{
                     height: 50,

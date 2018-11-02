@@ -153,21 +153,18 @@ export default class Three extends Component {
                           bottom: 5,
                           right: 5
                         }}
-                        onPress={() => {
-                          api = Api.getInstance();
-                          ls = LocalStorage.getInstance();
-                          userData = {
-                            project: item.id,
-                            user: 1,
-                            deviceId: ls.getPlayerId()
-                          };
-                          api.callApi(
-                            "addFollower",
-                            "POST",
-                            userData,
-                            response => {}
-                          );
-                        }}
+                        onPress={() => 
+                            {
+                                api = Api.getInstance();
+                                ls = LocalStorage.getInstance();
+                                userData = {
+                                    project: item.id,
+                                    user: ls.getUserId(),
+                                    deviceId: ls.getPlayerId()
+                                }
+                                api.callApi("addFollower","POST", userData ,response => {
+                                    });}
+                        }
                       >
                         <Icon
                           size={15}

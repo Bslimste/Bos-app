@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableHighlight,
   Dimensions,
-  Image
+  Image,
+  TouchableOpacity
 } from "react-native";
 import { Toolbar } from "react-native-material-ui";
 import LocalStorage from "../config/localStorage.js";
@@ -52,66 +53,57 @@ export default class Exchange extends Component {
         <FlatList
           data={this.state.dataArrayOffered}
           keyExtractor={item => "" + item.id}
-          numColumns={1}
+          numColumns={2}
           renderItem={({ item }) => (
-            <View style={styles.cardContainer}>
+            <TouchableOpacity
+              style={styles.cardContainer}
+              onPress={() =>
+                this.props.navigation.navigate("RequestDetail", {
+                  id: item.id,
+                  owner: item.owner,
+                  ownerId: item.ownerId,
+                  location: item.location,
+                  profilePhoto: item.profilePhoto,
+                  title: item.title,
+                  description: item.description,
+                  necessity: item.necessity,
+                  offered: item.offered,
+                  picture: item.picture
+                })
+              }
+            >
               <Image
                 source={{ uri: item.profilePhoto }}
                 resizeMode="cover"
-                style={{ width: 50, height: 50, borderRadius: 30, margin: 3 }}
+                style={{ width: "100%", height: 150 }}
               />
-              <View
+
+              <Text
                 style={{
-                  alignItems: "flex-start",
-                  width: Dimensions.get("window").width - 110
+                  fontSize: 16,
+                  fontWeight: "bold",
+                  padding: 0,
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  paddingTop: 10
+                }}
+                numberOfLines={2}
+              >
+                {item.title}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 12,
+                  padding: 0,
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  color: "#e95827",
+                  paddingBottom: 10
                 }}
               >
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: 18,
-                    color: "black"
-                  }}
-                >
-                  {item.title}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 13,
-                    color: "black"
-                  }}
-                >
-                  {item.location}
-                </Text>
-              </View>
-              <TouchableHighlight
-                onPress={() =>
-                  this.props.navigation.navigate("RequestDetail", {
-                    id: item.id,
-                    owner: item.owner,
-                    ownerId: item.ownerId,
-                    location: item.location,
-                    profilePhoto: item.profilePhoto,
-                    title: item.title,
-                    description: item.description,
-                    necessity: item.necessity,
-                    offered: item.offered,
-                    picture: item.picture
-                  })
-                }
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  width: 30
-                }}
-              >
-                <Icon
-                  size={25}
-                  name={"arrow-right"}
-                  style={{ color: "grey" }}
-                />
-              </TouchableHighlight>
-            </View>
+                {item.location}
+              </Text>
+            </TouchableOpacity>
           )}
         />
       </View>
@@ -123,64 +115,58 @@ export default class Exchange extends Component {
           keyExtractor={item => "" + item.id}
           numColumns={1}
           renderItem={({ item }) => (
-            <View style={styles.cardContainer}>
+            <TouchableOpacity
+              style={styles.cardContainerRow}
+              onPress={() =>
+                this.props.navigation.navigate("RequestDetail", {
+                  id: item.id,
+                  owner: item.owner,
+                  ownerId: item.ownerId,
+                  location: item.location,
+                  profilePhoto: item.profilePhoto,
+                  title: item.title,
+                  description: item.description,
+                  necessity: item.necessity,
+                  offered: item.offered,
+                  picture: item.picture
+                })
+              }
+            >
               <Image
                 source={{ uri: item.profilePhoto }}
                 resizeMode="cover"
-                style={{ width: 50, height: 50, borderRadius: 30, margin: 3 }}
+                style={{ width: 50, height: 50, borderRadius: 50, margin: 15 }}
               />
               <View
-                style={{
-                  alignItems: "flex-start",
-                  width: Dimensions.get("window").width - 110
-                }}
+                style={{ flexDirection: "column", justifyContent: "center" }}
               >
                 <Text
                   style={{
+                    fontSize: 16,
                     fontWeight: "bold",
-                    fontSize: 18,
-                    color: "black"
+                    padding: 0,
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    paddingTop: 10
                   }}
+                  numberOfLines={2}
                 >
                   {item.title}
                 </Text>
                 <Text
                   style={{
-                    fontSize: 13,
-                    color: "black"
+                    fontSize: 12,
+                    padding: 0,
+                    paddingLeft: 15,
+                    paddingRight: 15,
+                    color: "#e95827",
+                    paddingBottom: 10
                   }}
                 >
                   {item.location}
                 </Text>
               </View>
-              <TouchableHighlight
-                onPress={() =>
-                  this.props.navigation.navigate("RequestDetail", {
-                    id: item.id,
-                    owner: item.owner,
-                    ownerId: item.ownerId,
-                    location: item.location,
-                    profilePhoto: item.profilePhoto,
-                    title: item.title,
-                    description: item.description,
-                    necessity: item.necessity,
-                    offered: item.offered,
-                    picture: item.picture
-                  })
-                }
-                style={{
-                  flex: 1,
-                  alignItems: "flex-end",
-                  width: 30
-                }}
-              >
-                <Icon
-                  size={25}
-                  name={"arrow-right"}
-                  style={{ color: "grey" }}
-                />
-              </TouchableHighlight>
-            </View>
+            </TouchableOpacity>
           )}
         />
       </View>
@@ -191,13 +177,27 @@ export default class Exchange extends Component {
           leftElement="menu"
           centerElement="Exchange"
           onLeftElementPress={() => this.props.navigation.toggleDrawer()}
+          searchable={{
+            autoFocus: true,
+            placeholder: "Search"
+          }}
         />
         <TabView
           navigationState={this.state}
+          indicatorStyle={{ backgroundColor: "grey" }}
+          tabStyle={{ backgroundColor: "white" }}
           renderScene={SceneMap({
             asked: AskedRoute,
             offered: OfferedRoute
           })}
+          renderTabBar={props => (
+            <TabBar
+              {...props}
+              style={styles.tabbar}
+              indicatorStyle={styles.indicator}
+              labelStyle={{ color: "grey" }}
+            />
+          )}
           onIndexChange={index => this.setState({ index })}
         />
       </View>
@@ -206,22 +206,32 @@ export default class Exchange extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+  container: {},
+  tabbar: {
+    backgroundColor: "white"
   },
-
+  indicator: {
+    backgroundColor: "grey"
+  },
   cardContainer: {
     backgroundColor: "#ffffff",
-    borderWidth: 1,
     shadowOffset: { width: 0, height: 13 },
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 3,
-    padding: 5,
+    margin: 5,
     width: Dimensions.get("window").width,
-    height: 70,
+    flex: 1,
+    flexDirection: "column"
+  },
+  cardContainerRow: {
+    backgroundColor: "#ffffff",
+    shadowOffset: { width: 0, height: 13 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 3,
+    margin: 5,
+    width: "97%",
     flex: 1,
     flexDirection: "row"
   }

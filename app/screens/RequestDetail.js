@@ -32,8 +32,7 @@ export default class RequestDetail extends Component {
           {offered && (
             <Image
               source={{ uri: picture }}
-              resizeMode="cover"
-              style={{ width: Dimensions.get("window").width, height: 175 }}
+              style={{ width: "100%", height: 175 }}
             />
           )}
           <View style={styles.cardContainer}>
@@ -41,17 +40,22 @@ export default class RequestDetail extends Component {
               <Image
                 source={{ uri: profilePhoto }}
                 resizeMode="cover"
-                style={{ width: 75, height: 75, borderRadius: 30 }}
+                style={{ width: 50, height: 50, borderRadius: 50 }}
               />
-              <Text
+              <View
                 style={{
-                  fontWeight: "bold",
-                  fontSize: 25,
-                  color: "black"
+                  flexDirection: "column",
+                  height: 60,
+                  width: "100%",
+                  padding: 10,
+                  paddingTop: 5
                 }}
               >
-                {title}
-              </Text>
+                <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                  {title}
+                </Text>
+                <Text style={{ fontSize: 16 }}>{owner}</Text>
+              </View>
             </View>
             <View style={styles.descContainer}>
               <Text>{description}</Text>
@@ -59,7 +63,7 @@ export default class RequestDetail extends Component {
                 <Text
                   style={{
                     fontWeight: "bold",
-                    fontSize: 25,
+                    fontSize: 16,
                     color: "black"
                   }}
                 >
@@ -77,34 +81,28 @@ export default class RequestDetail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "flex-start",
     alignItems: "flex-start"
   },
   cardContainer: {
     backgroundColor: "white",
-    borderRadius: 10,
-    borderWidth: 1,
+    height: "100%",
     shadowOffset: { width: 0, height: 13 },
     shadowOpacity: 0.3,
     shadowRadius: 6,
     elevation: 3,
     padding: 5,
-    flex: 1,
     alignItems: "flex-start"
   },
   descContainer: {
-    marginTop: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    flex: 3,
+    margin: 25,
     justifyContent: "flex-start"
   },
   necessityContainer: {
     marginTop: 50
   },
   cardHeader: {
-    flex: 1,
+    margin: 10,
     flexDirection: "row",
     alignItems: "flex-start",
     alignSelf: "center",

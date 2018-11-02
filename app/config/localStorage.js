@@ -39,4 +39,12 @@ export default class LocalStorage {
   getPlayerId() {
     return this.playerId;
   }
+
+  saveUserId(userId) {
+    this.userId = userId;
+  }
+
+  getUserId() {
+    return this.userId;
+  }
 }
