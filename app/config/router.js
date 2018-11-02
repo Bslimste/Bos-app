@@ -7,6 +7,7 @@ import {
   DrawerItems
 } from "react-navigation";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 import { NavigationComponent } from "react-native-material-bottom-navigation-performance";
 import { Drawer, Avatar } from "react-native-material-ui";
@@ -355,7 +356,9 @@ export const DetailTab = TabNavigator(
       screen: DetailStack,
       navigationOptions: {
         tabBarLabel: "Detail",
-        tabBarIcon: <Icon size={25} name={"info"} style={{ color: "grey" }} />
+        tabBarIcon: (
+          <Icon size={25} name={"information"} style={{ color: "grey" }} />
+        )
       }
     },
     UpdatesStack: {
@@ -363,7 +366,7 @@ export const DetailTab = TabNavigator(
       navigationOptions: {
         tabBarLabel: "Updates",
         tabBarIcon: (
-          <Icon size={25} name={"timeline"} style={{ color: "grey" }} />
+          <Icon2 size={25} name={"timeline"} style={{ color: "grey" }} />
         )
       }
     }
@@ -390,12 +393,16 @@ export const DetailTab = TabNavigator(
         tabs: {
           DetailStack: {
             activeIcon: (
-              <Icon size={25} name={"info"} style={{ color: "#2196f3" }} />
+              <Icon
+                size={25}
+                name={"information"}
+                style={{ color: "#2196f3" }}
+              />
             )
           },
           UpdatesStack: {
             activeIcon: (
-              <Icon size={25} name={"timeline"} style={{ color: "#2196f3" }} />
+              <Icon2 size={25} name={"timeline"} style={{ color: "#2196f3" }} />
             )
           }
         }

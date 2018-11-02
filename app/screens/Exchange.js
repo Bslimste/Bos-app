@@ -73,7 +73,7 @@ export default class Exchange extends Component {
               }
             >
               <Image
-                source={{ uri: item.profilePhoto }}
+                source={{ uri: item.picture }}
                 resizeMode="cover"
                 style={{ width: "100%", height: 150 }}
               />

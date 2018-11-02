@@ -78,7 +78,7 @@ export default class Updates extends Component {
                 }}
               />
               <Text
-                style={{ margin: 20, width: 250 }}
+                style={{ margin: 20, width: 225 }}
                 onLayout={event => {
                   this.setState({ height: event.nativeEvent.layout.height });
                 }}

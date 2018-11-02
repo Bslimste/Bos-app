@@ -17,21 +17,25 @@ export default class Two extends Component {
   }
 
   render() {
+    const { navigation } = this.props;
+
+    const name = navigation.getParam("name", "");
+    const picture = navigation.getParam("picture", "");
+
     return (
       <ScrollView>
         <View
           style={{ width: "100%", height: "100%", backgroundColor: "white" }}
         >
           <Toolbar
-            leftElement="menu"
+            leftElement="arrow-back"
             centerElement="Profile"
-            onLeftElementPress={() => this.props.navigation.toggleDrawer()}
+            onLeftElementPress={() => this.props.navigation.goBack()}
           />
           <Image
             style={{ height: 200, width: "100%" }}
             source={{
-              uri:
-                "https://cdn1.thr.com/sites/default/files/2017/08/gettyimages-630421358_-_h_2017.jpg"
+              uri: picture
             }}
           />
           <View
@@ -77,9 +81,7 @@ export default class Two extends Component {
             >
               <Icon size={25} name={"message"} style={{ color: "white" }} />
             </TouchableOpacity>
-            <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-              Bartel-Jaap de Wildt
-            </Text>
+            <Text style={{ fontWeight: "bold", fontSize: 20 }}>{name}</Text>
             <Text style={{ fontSize: 16, color: "#e95827" }}>
               Docent Statistiek
             </Text>

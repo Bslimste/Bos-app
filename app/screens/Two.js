@@ -92,31 +92,32 @@ export default class Two extends Component {
         messages: GiftedChat.append(previousState.messages, messages)
       };
     });
-
+    setTimeout(() => {
+      this.onReceive(
+        "Ja ik heb de arduino nog liggen, bel me anders vanavond maar even op 06-123456789"
+      );
+    }, 1000);
     // for demo purpose
   }
 
-  onReceive(data) {
-    console.log(data);
-    const { id, senderId, text, createdAt } = data;
-    const incomingMessage = {
-      _id: id,
-      text: text,
-      createdAt: new Date(createdAt),
-      user: {
-        _id: senderId,
-        name: senderId,
-        avatar:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmXGGuS_PrRhQt73sGzdZvnkQrPXvtA-9cjcPxJLhLo8rW-sVA"
-      }
-    };
-
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, incomingMessage)
-    }));
+  onReceive(text) {
+    this.setState(previousState => {
+      return {
+        messages: GiftedChat.append(previousState.messages, {
+          _id: Math.round(Math.random() * 1000000),
+          text: text,
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: "React Native",
+            avatar:
+              "https://i1.rgstatic.net/ii/profile.image/302201988157445-1449061976298_Q512/Bas_Heijne.jpg"
+          }
+        })
+      };
+    });
   }
 
-  /*
   answerDemo(messages) {
     if (messages.length > 0) {
       if (messages[0].image || messages[0].location || !this._isAlright) {
@@ -134,8 +135,10 @@ export default class Two extends Component {
         console.log(messages[0].text.includes("project"));
         console.log(messages[0].text.includes("work"));
         if (messages.length > 0) {
-          if (messages[0].text == "Hey!") {
-            this.onReceive("Hi");
+          if (messages[0].text == "Hoi") {
+            this.onReceive(
+              "Ja ik heb de arduino nog liggen, bel me anders vanavond maar even op 06-123456789"
+            );
           } else if (
             messages[0].text.includes("project") &&
             messages[0].text.includes("work")
@@ -157,7 +160,6 @@ export default class Two extends Component {
       });
     }, 1000);
   }
-  */
 
   /*
   onReceive(text) {
